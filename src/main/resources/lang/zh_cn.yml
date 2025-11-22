@@ -160,8 +160,8 @@ gui:
         name: "第 %page%/%pages% 页"
         lore:
           - ""
-          - "<yellow>左击：下一页</yellow>"
-          - "<yellow>右击：上一页</yellow>"
+          - "<yellow>左击：上一页</yellow>"
+          - "<yellow>右击：下一页</yellow>"
 
   number-selector:
     buttons:
@@ -182,7 +182,6 @@ gui:
         lore:
           - "<dark_gray>%asset_category%</dark_gray>"
           - ""
-          - "<gray>%asset_name%</gray>"
           - "<dark_gray> - </dark_gray><gray>成交量：</gray><white>%volume%</white>"
           - "<dark_gray> - </dark_gray><gray>开盘价：</gray><white>$%open_price%</white>"
           - "<dark_gray> - </dark_gray><gray>当日区间：</gray><white>$%range_low% 至 $%range_high%</white>"
