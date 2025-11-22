@@ -5,13 +5,17 @@ import com.faridfaharaj.profitable.Profitable;
 import com.faridfaharaj.profitable.data.tables.AccountHoldings;
 import com.faridfaharaj.profitable.data.tables.Accounts;
 import com.faridfaharaj.profitable.util.MessagingUtil;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Map;
 
@@ -170,5 +174,22 @@ public class ComItem extends Asset {
         return false;
     }
 
+    @Override
+    public String getName() {
+        if (stack.hasItemMeta()) {
+            ItemMeta itemMeta = stack.getItemMeta();
+            Component displayedName = itemMeta.displayName();
+
+            if (displayedName != null) {
+                return PlainTextComponentSerializer.plainText().serialize(displayedName);
+            }
+
+            if (itemMeta.hasItemName()) {
+                return PlainTextComponentSerializer.plainText().serialize(itemMeta.itemName());
+            }
+        }
+
+        return "<lang:item.minecraft." + stack.getType().toString().toLowerCase() + ">";
+    }
 
 }

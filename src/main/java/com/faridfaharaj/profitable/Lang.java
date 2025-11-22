@@ -16,7 +16,7 @@ public class Lang {
 
     private final JavaPlugin plugin;
     private FileConfiguration lang;
-    private final String[] langCodes = {"en","es"};
+    private final String[] langCodes = {"en","es","zh_cn"};
 
     TagResolver resolver = TagResolver.resolver(
 

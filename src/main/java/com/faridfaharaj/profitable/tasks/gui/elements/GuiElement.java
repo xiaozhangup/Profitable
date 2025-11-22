@@ -4,6 +4,7 @@ import com.faridfaharaj.profitable.Profitable;
 import com.faridfaharaj.profitable.tasks.gui.ChestGUI;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.ClickType;
@@ -46,10 +47,11 @@ public class GuiElement {
     public void setDisplayName(Component text){
 
         ItemMeta metaAccountButton = display.getItemMeta();
+        Component component = text == null ? null : text.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE);
         if(!Profitable.getfolialib().isSpigot()){
-            metaAccountButton.displayName(text);
+            metaAccountButton.displayName(component);
         }else {
-            metaAccountButton.setDisplayName(LegacyComponentSerializer.legacySection().serialize(text));
+            metaAccountButton.setDisplayName(LegacyComponentSerializer.legacySection().serialize(component));
         }
         display.setItemMeta(metaAccountButton);
 
@@ -58,13 +60,16 @@ public class GuiElement {
     public void setLore(List<Component> lore){
 
         if(lore != null){
+            List<Component> components = lore.stream().map(
+                    (component) -> component.decorationIfAbsent(TextDecoration.ITALIC, TextDecoration.State.FALSE)
+            ).toList();
             ItemMeta metaAccountButton = display.getItemMeta();
 
             if(!Profitable.getfolialib().isSpigot()){
-                metaAccountButton.lore(lore);
+                metaAccountButton.lore(components);
             }else {
                 List<String> loreString = new ArrayList<>();
-                for(Component component : lore){
+                for(Component component : components){
                     loreString.add(LegacyComponentSerializer.legacySection().serialize(component));
                 }
                 metaAccountButton.setLore(loreString);

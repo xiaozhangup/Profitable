@@ -106,9 +106,9 @@ public final class UserOrdersGui extends ChestGUI {
         if(pageButton != null){
             if(slot == pageButton.getSlot()){
                 if(click.isLeftClick()){
-                    page+=1;
-                }if(click.isRightClick()){
                     page-=1;
+                }if(click.isRightClick()){
+                    page+=1;
                 }
                 page = Math.clamp(page, 0, pages);
                 updatePage();

@@ -177,9 +177,9 @@ public final class AssetExplorer extends ChestGUI {
         if(pages > 0){
             if(slot == pageButton.getSlot()){
                 if(click.isLeftClick()){
-                    page+=1;
-                }if(click.isRightClick()){
                     page-=1;
+                }if(click.isRightClick()){
+                    page+=1;
                 }
                 page = Math.clamp(page, 0, pages);
                 updatePage();

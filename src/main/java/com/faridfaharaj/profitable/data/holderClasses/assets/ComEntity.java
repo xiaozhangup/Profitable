@@ -40,7 +40,7 @@ public class ComEntity extends Asset {
 
     public void sendCommodityEntityToPlayer(Player player, String account, int amount){
 
-        EntityType entityType = EntityType.fromName(stack.getType().name().replace("SPAWN_",""));
+        EntityType entityType = EntityType.fromName(stack.getType().name().replace("_SPAWN_EGG",""));
 
         String claimId = Accounts.getEntityClaimId(player.getWorld(),account);
         Profitable.getfolialib().getScheduler().runAtEntity(player, task -> {
@@ -154,6 +154,14 @@ public class ComEntity extends Asset {
         }
         return false;
 
+    }
+
+    @Override
+    public String getName() {
+
+        EntityType entityType = EntityType.fromName(stack.getType().name().replace("_SPAWN_EGG",""));
+
+        return "<lang:entity.minecraft." + entityType.toString().toLowerCase() + ">";
     }
 
 }
