@@ -5,6 +5,7 @@ import com.faridfaharaj.profitable.Profitable;
 import com.faridfaharaj.profitable.data.holderClasses.assets.Asset;
 import com.faridfaharaj.profitable.data.tables.Candles;
 import com.faridfaharaj.profitable.tasks.TemporalItems;
+import com.faridfaharaj.profitable.util.TimeUtil;
 import com.faridfaharaj.profitable.tasks.gui.ChestGUI;
 import com.faridfaharaj.profitable.tasks.gui.elements.GuiElement;
 import com.faridfaharaj.profitable.tasks.gui.elements.specific.AssetButton;
@@ -76,7 +77,7 @@ public final class AssetExplorer extends ChestGUI {
                 Profitable.getLang().langToLore("gui.asset-explorer.buttons.delivery.lore")
                 , vectorSlotPosition(3, 5));
 
-        long time = player.getWorld().getFullTime();
+        long time = TimeUtil.getNowMillis();
         updateAssets(player.getWorld(), assetType, previousCache, time);
 
 
@@ -171,7 +172,7 @@ public final class AssetExplorer extends ChestGUI {
                             Map.entry("%category_list%", types)
             ));
             categoryButton.show(this);
-            updateAssets(player.getWorld(), assetType, assetCache, player.getWorld().getFullTime());
+            updateAssets(player.getWorld(), assetType, assetCache, TimeUtil.getNowMillis());
         }
 
         if(pages > 0){

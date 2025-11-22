@@ -7,6 +7,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.md_5.bungee.chat.ComponentSerializer;
 import org.bukkit.World;
@@ -23,6 +24,7 @@ import java.util.UUID;
 public class MessagingUtil {
 
     static DecimalFormat decimalFormat = new DecimalFormat("0.0####");
+    static Component prefix = MiniMessage.miniMessage().deserialize("<dark_gray>[<color:#02667b>市场</color>]</dark_gray> ");
 
     public static Component buttonComponent(String text, String command){
 
@@ -72,11 +74,11 @@ public class MessagingUtil {
 
             if(sender instanceof Player player){
                 Profitable.getfolialib().getScheduler().runAtEntity(player, task -> {
-                    sender.sendMessage(component);
+                    sender.sendMessage(prefix.append(component));
                 });
             }else{
                 Profitable.getfolialib().getScheduler().runNextTick(task -> {
-                    sender.sendMessage(component);
+                    sender.sendMessage(prefix.append(component));
                 });
             }
 
@@ -147,16 +149,8 @@ public class MessagingUtil {
         try{
             UUID uuid = world.getUID();
 
-            if(Configuration.MULTIWORLD){
-                ByteBuffer buffer = ByteBuffer.allocate(16);
-
-                buffer.putLong(uuid.getMostSignificantBits());
-                buffer.putLong(uuid.getLeastSignificantBits());
-
-                return buffer.array();
-            }else {
-                return "_____server_____".getBytes(StandardCharsets.US_ASCII);
-            }
+            // Always use server-wide id (data-per-world removed)
+            return "_____server_____".getBytes(StandardCharsets.US_ASCII);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

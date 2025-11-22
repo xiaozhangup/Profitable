@@ -2,6 +2,7 @@ package com.faridfaharaj.profitable.tasks;
 
 import com.faridfaharaj.profitable.Configuration;
 import com.faridfaharaj.profitable.data.tables.Candles;
+import com.faridfaharaj.profitable.util.TimeUtil;
 import com.faridfaharaj.profitable.data.holderClasses.Candle;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -54,11 +55,11 @@ public class MapGraphRenderer extends MapRenderer {
         List<Candle> candles;
 
         if (time > 5376000) {
-            candles = Candles.getInterval(player.getWorld(), asset, player.getWorld().getFullTime()/720000*720000-time, 2);
+            candles = Candles.getInterval(player.getWorld(), asset, TimeUtil.roundToInterval(TimeUtil.getNowMillis(), 2)-time, 2);
         }else if(time > 768000){
-            candles = Candles.getInterval(player.getWorld(), asset, player.getWorld().getFullTime()/168000*168000-time, 1);
+            candles = Candles.getInterval(player.getWorld(), asset, TimeUtil.roundToInterval(TimeUtil.getNowMillis(), 1)-time, 1);
         } else{
-            candles = Candles.getInterval(player.getWorld(), asset, player.getWorld().getFullTime()/24000*24000-time, 0);
+            candles = Candles.getInterval(player.getWorld(), asset, TimeUtil.roundToInterval(TimeUtil.getNowMillis(), 0)-time, 0);
         }
 
         if(candles.size() <= 1){
@@ -189,17 +190,17 @@ public class MapGraphRenderer extends MapRenderer {
     }
 
     public static ItemStack createGraphMap(Player player, String assetid, long time, String interval) {
-        MapView mapView = Bukkit.createMap(player.getWorld());
-        mapView.getRenderers().forEach(mapView::removeRenderer);
-        mapView.addRenderer(new MapGraphRenderer(assetid, time, interval));
+         MapView mapView = Bukkit.createMap(player.getWorld());
+         mapView.getRenderers().forEach(mapView::removeRenderer);
+         mapView.addRenderer(new MapGraphRenderer(assetid, time, interval));
 
-        ItemStack mapItem = new ItemStack(Material.FILLED_MAP);
-        MapMeta meta = (MapMeta) mapItem.getItemMeta();
-        meta.setMapView(mapView);
-        mapItem.setItemMeta(meta);
+         ItemStack mapItem = new ItemStack(Material.FILLED_MAP);
+         MapMeta meta = (MapMeta) mapItem.getItemMeta();
+         meta.setMapView(mapView);
+         mapItem.setItemMeta(meta);
 
-        return mapItem;
-    }
+         return mapItem;
+     }
 
 
     public static Color blendColors(Color base, Color overlay) {

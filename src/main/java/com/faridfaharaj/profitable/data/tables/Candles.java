@@ -8,6 +8,7 @@ import com.faridfaharaj.profitable.data.holderClasses.assets.Asset;
 import com.faridfaharaj.profitable.data.holderClasses.Candle;
 import com.faridfaharaj.profitable.tasks.gui.elements.specific.AssetCache;
 import com.faridfaharaj.profitable.util.MessagingUtil;
+import com.faridfaharaj.profitable.util.TimeUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -25,7 +26,8 @@ public class Candles {
     //this could be way more performant, needs fixing  <------------
 
     static String[] tables = {"day", "week", "month"};
-    static long[] intervals = {24000, 168000, 720000};
+    // intervals are in milliseconds now (day = 2 hours)
+    static long[] intervals = {TimeUtil.DAY_MS, TimeUtil.WEEK_MS, TimeUtil.MONTH_MS};
 
     public static boolean updateDay(World world, String asset, double price, double volume){
 
@@ -48,8 +50,10 @@ public class Candles {
 
 
             try (PreparedStatement stmt = DataBase.getConnection().prepareStatement(Profitable.getInstance().getConfig().getInt("database.database-type") == 0? sqlite:mysql)) {
+                // world id is still recorded, but time is based on real-world ms
                 stmt.setBytes(1, MessagingUtil.getWorldId(world));
-                stmt.setLong(2, (world.getFullTime() / intervals[i]) * intervals[i]);
+                long now = TimeUtil.getNowMillis();
+                stmt.setLong(2, TimeUtil.roundToInterval(now, i));
                 stmt.setDouble(3,price);
                 stmt.setDouble(4,price);
                 stmt.setDouble(5,price);
@@ -77,7 +81,8 @@ public class Candles {
         try (PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)) {
             stmt.setBytes(1, MessagingUtil.getWorldId(world));
             stmt.setString(2, asset);
-            stmt.setLong(3, (time / intervals[0]) * intervals[0]);
+            // time parameter expected as millis or ticks - normalize to ms day interval
+            stmt.setLong(3, TimeUtil.roundToInterval(time, 0));
             stmt.setBytes(4, MessagingUtil.getWorldId(world));
             stmt.setString(5, asset);
             stmt.setBytes(6, MessagingUtil.getWorldId(world));
@@ -133,7 +138,7 @@ public class Candles {
     """;
 
         byte[] worldBytes = MessagingUtil.getWorldId(world);
-        long roundedTime = (time / intervals[0]) * intervals[0];
+        long roundedTime = TimeUtil.roundToInterval(time, 0);
 
         try (PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)) {
             stmt.setLong(1, roundedTime);
@@ -267,7 +272,7 @@ public class Candles {
 
         try (PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)) {
             stmt.setBytes(1, MessagingUtil.getWorldId(world));
-            stmt.setLong(2, (world.getFullTime() / intervals[2]) * intervals[2]);
+            stmt.setLong(2, TimeUtil.roundToInterval(TimeUtil.getNowMillis(), 2));
 
             Component component = Component.text("");
             try (ResultSet rs = stmt.executeQuery()) {

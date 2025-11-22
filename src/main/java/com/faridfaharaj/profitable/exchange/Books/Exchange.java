@@ -11,6 +11,7 @@ import com.faridfaharaj.profitable.data.holderClasses.assets.Asset;
 import com.faridfaharaj.profitable.data.holderClasses.Order;
 import com.faridfaharaj.profitable.tasks.TemporalItems;
 import com.faridfaharaj.profitable.util.MessagingUtil;
+import com.faridfaharaj.profitable.util.TimeUtil;
 import com.faridfaharaj.profitable.util.NamingUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -91,7 +92,7 @@ public class Exchange {
         Asset baseAsset = Configuration.MAINCURRENCYASSET;
         Asset collateralAsset = order.isSideBuy()? baseAsset: tradedAsset;
 
-        Candle lastday = Candles.getLastDay(player.getWorld() ,tradedAsset.getCode(), player.getWorld().getFullTime());
+        Candle lastday = Candles.getLastDay(player.getWorld() ,tradedAsset.getCode(), TimeUtil.getNowMillis());
         if(order.getType() == Order.OrderType.STOP_LIMIT){
 
             if(order.isSideBuy()?lastday.getClose() >= order.getPrice(): lastday.getClose() <= order.getPrice()){

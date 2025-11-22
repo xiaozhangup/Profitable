@@ -72,7 +72,8 @@ public class Configuration {
         profitable.saveDefaultConfig();
         FileConfiguration config = profitable.getConfig();
 
-        MULTIWORLD = config.getBoolean("database.data-per-world");
+        // data-per-world feature removed: always false
+        MULTIWORLD = false;
         GENERATEASSETS = config.getBoolean("exchange.commodities.generation.active");
 
         if(GENERATEASSETS){

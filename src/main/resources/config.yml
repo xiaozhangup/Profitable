@@ -15,7 +15,7 @@ colors: # 允许自定义命令输出和图表的颜色
   bearish: "#FA413B"
 
 database:
-  # 如果为 false，则订单可以跨世界交易
+  # note: per-world data feature removed; plugin always uses server-wide shared data
   data-per-world: false
 
   # (0)-SQLite (1)-MySQL
