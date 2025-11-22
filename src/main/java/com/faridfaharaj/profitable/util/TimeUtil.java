@@ -7,7 +7,8 @@ package com.faridfaharaj.profitable.util;
  */
 public class TimeUtil {
 
-    public static final long DAY_MS = 2L * 60L * 60L * 1000L; // 2 hours
+//    public static final long DAY_MS = 2L * 60L * 60L * 1000L; // 2 hours
+    public static final long DAY_MS = 5L * 60L * 1000L; // 5 min
     public static final long WEEK_MS = DAY_MS * 7L;
     public static final long MONTH_MS = DAY_MS * 30L;
 

@@ -110,7 +110,7 @@ public class Orders {
 
     public static List<Order> getBestOrders(World world,String asset, boolean sideBuy, double price, double units) {
         List<Order> orders = new ArrayList<>();
-        String sql = "SELECT * FROM orders WHERE world = ? AND asset_id = ? AND sideBuy = ? AND price " + (sideBuy ? "<=" : ">=") + " ? AND order_type = " + Order.OrderType.LIMIT.getValue() + " ORDER BY price " + (sideBuy ? "ASC" : "DESC") + " LIMIT " + Math.ceil(units) +";";
+        String sql = "SELECT * FROM orders WHERE world = ? AND asset_id = ? AND sideBuy = ? AND price " + (sideBuy ? "<=" : ">=") + " ? AND order_type = " + Order.OrderType.LIMIT.getValue() + " ORDER BY price " + (sideBuy ? "ASC" : "DESC") + " LIMIT " + (int) Math.ceil(units) +";";
 
         try (PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)) {
             stmt.setBytes(1, MessagingUtil.getWorldId(world));
