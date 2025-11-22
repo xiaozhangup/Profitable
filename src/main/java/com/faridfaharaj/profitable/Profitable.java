@@ -124,41 +124,14 @@ public final class Profitable extends JavaPlugin {
         getLogger().info("Using " + Configuration.MAINCURRENCYASSET.getCode() + " as main currency on the exchange");
 
         //commands-------------------------
-        getCommand("pbuy").setExecutor(new TransactCommand());
-        getCommand("pbuy").setTabCompleter(new TransactCommand.CommandTabCompleter());
-
-        getCommand("psell").setExecutor(new TransactCommand());
-        getCommand("psell").setTabCompleter(new TransactCommand.CommandTabCompleter());
-
-
-        getCommand("assets").setExecutor(new AssetsCommand());
-        getCommand("assets").setTabCompleter(new AssetsCommand.CommandTabCompleter());
-
-        getCommand("top").setExecutor(new TopCommand());
-        getCommand("top").setTabCompleter(new TopCommand.CommandTabCompleter());
-
-
-        getCommand("account").setExecutor(new AccountCommand());
-        getCommand("account").setTabCompleter(new AccountCommand.CommandTabCompleter());
-
-        getCommand("wallet").setExecutor(new WalletCommand());
-        getCommand("wallet").setTabCompleter(new WalletCommand.CommandTabCompleter());
-
-        getCommand("orders").setExecutor(new OrdersCommand());
-        getCommand("orders").setTabCompleter(new OrdersCommand.CommandTabCompleter());
-
-        getCommand("delivery").setExecutor(new DeliveryCommand());
-        getCommand("delivery").setTabCompleter(new DeliveryCommand.CommandTabCompleter());
-
-        getCommand("claimtag").setExecutor(new ClaimtagCommand());
-
-
-        getCommand("admin").setExecutor(new AdminCommand());
-        getCommand("admin").setTabCompleter(new AdminCommand.CommandTabCompleter());
-
-
-        getCommand("help").setExecutor(new HelpCommand());
-        getCommand("help").setTabCompleter(new HelpCommand.CommandTabCompleter());
+        // Now use a single /profitable command with subcommands dispatched in ProfitableCommand
+        if (getCommand("profitable") != null) {
+            ProfitableCommand profitableCommand = new ProfitableCommand();
+            getCommand("profitable").setExecutor(profitableCommand);
+            getCommand("profitable").setTabCompleter(profitableCommand);
+        } else {
+            getLogger().severe("Command 'profitable' is not defined in plugin.yml");
+        }
 
         //event handler------------------
         getServer().getPluginManager().registerEvents(new Events(), this);
