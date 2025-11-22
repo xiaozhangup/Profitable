@@ -2,7 +2,7 @@ generic:
   error:
     cant-console: "<red>无法在控制台中使用此命令</red>"
     missing-perm: "<red>你没有权限执行此操作</red>"
-    invalid-subcommand: "<red>无效的子命令：%sub_command%</red>"
+    invalid-subcommand: "<red>无效的子命令: %sub_command%</red>"
     invalid-amount: "<red>无效的数额 %invalid_amount%</red>"
 
 temp-items:
@@ -24,8 +24,8 @@ orders:
 
 
 account:
-  display: "<gray>当前账户：<yellow>(%account%)</yellow></gray>"
-  delete: "<red>已删除账户：%account%</red>"
+  display: "<gray>当前账户: <yellow>(%account%)</yellow></gray>"
+  delete: "<red>已删除账户: %account%</red>"
   login: "<gray>成功登录到账户 <yellow>%account%</yellow>！</gray>"
   registry: "<gray>账户 <yellow>%account%</yellow> 注册成功！</gray>"
   logout: "<gray>已成功登出！</gray>"
@@ -86,9 +86,9 @@ assets:
     cant-claim-entity: "<red>不允许拥有此类型实体</red>"
 
 delivery:
-  display: "<br><gray>物品配送位置：<yellow>%i_position%</yellow></gray><br><gray>实体配送位置：<yellow>%e_position%</yellow></gray><br>"
-  updated-item: "<gray>已将物品配送位置更新为：<yellow>%position%</yellow></gray>"
-  updated-entity: "<gray>已将实体配送位置更新为：<yellow>%position%</yellow></gray>"
+  display: "<br><gray>物品配送位置: <yellow>%i_position%</yellow></gray><br><gray>实体配送位置: <yellow>%e_position%</yellow></gray><br>"
+  updated-item: "<gray>已将物品配送位置更新为: <yellow>%position%</yellow></gray>"
+  updated-entity: "<gray>已将实体配送位置更新为: <yellow>%position%</yellow></gray>"
   error:
     items-must-be-container: "<red>物品配送位置必须是一个容器方块</red>"
     missing-item-delivery: "<red>你必须先设置一个物品配送位置！</red>"
@@ -160,8 +160,8 @@ gui:
         name: "第 %page%/%pages% 页"
         lore:
           - ""
-          - "<yellow>左击：上一页</yellow>"
-          - "<yellow>右击：下一页</yellow>"
+          - "<yellow>左击: 上一页</yellow>"
+          - "<yellow>右击: 下一页</yellow>"
 
   number-selector:
     buttons:
@@ -182,9 +182,9 @@ gui:
         lore:
           - "<dark_gray>%asset_category%</dark_gray>"
           - ""
-          - "<dark_gray> - </dark_gray><gray>成交量：</gray><white>%volume%</white>"
-          - "<dark_gray> - </dark_gray><gray>开盘价：</gray><white>$%open_price%</white>"
-          - "<dark_gray> - </dark_gray><gray>当日区间：</gray><white>$%range_low% 至 $%range_high%</white>"
+          - "<dark_gray> - </dark_gray><gray>成交量: </gray><white>%volume%</white>"
+          - "<dark_gray> - </dark_gray><gray>开盘价: </gray><white>$%open_price%</white>"
+          - "<dark_gray> - </dark_gray><gray>当日区间: </gray><white>$%range_low% 至 $%range_high%</white>"
           - ""
           - "<yellow>左击交易</yellow>"
 #          - "<yellow>右击查看图表</yellow>"
@@ -255,10 +255,10 @@ gui:
         lore:
           - "<dark_gray>%asset_type%</dark_gray>"
           - ""
-          - "<gray>已持有：%owned_asset_amount%</gray>"
+          - "<gray>已持有: %owned_asset_amount%</gray>"
           - ""
-          - "<gray>市场价格：%price_asset_amount%</gray>"
-          - "<gray>总价值：%value_asset_amount%</gray>"
+          - "<gray>市场价格: %price_asset_amount%</gray>"
+          - "<gray>总价值: %value_asset_amount%</gray>"
           - ""
           - "<yellow>左击提取</yellow>"
           - "<yellow>右击存入</yellow>"
@@ -269,12 +269,12 @@ gui:
         lore:
           - "<dark_gray>%asset%</dark_gray>"
           - ""
-          - "<gray>类型：%order_type%</gray>"
+          - "<gray>类型: %order_type%</gray>"
           - ""
-          - "<gray>数量：<white>%base_asset_amount%</white></gray>"
-          - "<gray>价格：%quote_asset_amount%</gray>"
+          - "<gray>数量: <white>%base_asset_amount%</white></gray>"
+          - "<gray>价格: %quote_asset_amount%</gray>"
           - ""
-          - "<gray>总价值：%value_asset_amount%</gray>"
+          - "<gray>总价值: %value_asset_amount%</gray>"
           - ""
           - "<yellow>左击取消</yellow>"
 
@@ -283,13 +283,13 @@ gui:
     title-withdrawal: "选择提取数量"
     buttons:
       submit-deposit:
-        name: "数量：<yellow>%amount% %asset%</yellow>"
+        name: "数量: <yellow>%amount% %asset%</yellow>"
         lore:
           - "<dark_gray>%asset%</dark_gray>"
           - ""
           - "<yellow>左击确认存入</yellow>"
       submit-withdrawal:
-        name: "<yellow>数量：%amount% %asset%</yellow>"
+        name: "<yellow>数量: %amount% %asset%</yellow>"
         lore:
           - "<dark_gray>%asset%</dark_gray>"
           - ""
@@ -304,9 +304,9 @@ gui:
           lore:
             - "<dark_gray>%asset%</dark_gray>"
             - ""
-            - "<gray>卖一价：%ask_asset_amount%</gray>"
+            - "<gray>卖一价: %ask_asset_amount%</gray>"
             - ""
-            - "<gray>最低挂单价格：</gray>"
+            - "<gray>最低挂单价格: </gray>"
             - "%price_list%"
             - ""
             - "<yellow>左击选择卖出</yellow>"
@@ -321,9 +321,9 @@ gui:
           lore:
             - "<dark_gray>%asset%</dark_gray>"
             - ""
-            - "<gray>买一价：%bid_asset_amount%</gray>"
+            - "<gray>买一价: %bid_asset_amount%</gray>"
             - ""
-            - "<gray>最高挂单价格：</gray>"
+            - "<gray>最高挂单价格: </gray>"
             - "%price_list%"
             - ""
             - "<yellow>左击选择买入</yellow>"
@@ -380,22 +380,22 @@ gui:
       title: "请选择价格"
       buttons:
         submit:
-          name: "你的价格：<yellow>%amount% %asset%</yellow>"
+          name: "你的价格: <yellow>%amount% %asset%</yellow>"
           lore:
             - "<dark_gray>%asset%</dark_gray>"
             - ""
-            - "<gray>当前资产价格：%price_asset_amount%</gray>"
+            - "<gray>当前资产价格: %price_asset_amount%</gray>"
             - ""
             - "<yellow>点击以该价格继续</yellow>"
     units-select:
       title: "请选择数量"
       buttons:
         submit:
-          name: "交易数量：<yellow>%amount% %asset%</yellow>"
+          name: "交易数量: <yellow>%amount% %asset%</yellow>"
           lore:
             - "<dark_gray>%asset%</dark_gray>"
             - ""
-            - "<gray>总价值：%value_asset_amount%</gray>"
+            - "<gray>总价值: %value_asset_amount%</gray>"
             - ""
             - "<yellow>点击以该数量继续</yellow>"
     confirmation:
@@ -405,12 +405,12 @@ gui:
           lore:
             - "<dark_gray>%asset%</dark_gray>"
             - ""
-            - "<gray>类型：%order_type%</gray>"
+            - "<gray>类型: %order_type%</gray>"
             - ""
-            - "<gray>数量：<white>%base_asset_amount%</white></gray>"
-            - "<gray>价格：%quote_asset_amount%</gray>"
+            - "<gray>数量: <white>%base_asset_amount%</white></gray>"
+            - "<gray>价格: %quote_asset_amount%</gray>"
             - ""
-            - "<gray>总价值：%value_asset_amount%</gray>"
+            - "<gray>总价值: %value_asset_amount%</gray>"
             - ""
             - "<yellow>左击确认发送此订单</yellow>"
 

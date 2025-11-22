@@ -38,7 +38,7 @@ public final class UnitsSelect extends QuantitySelectGui {
 
     @Override
     protected void onAmountUpdate(double newAmount) {
-        getSubmitButton().setDisplayName(Profitable.getLang().get("gui.order-building.units-select.buttons.submit.name", Map.entry("%amount%", String.valueOf(this.amount)), Map.entry("%asset%", order.getAsset())));
+        getSubmitButton().setDisplayName(Profitable.getLang().get("gui.order-building.units-select.buttons.submit.name", Map.entry("%amount%", String.valueOf(this.amount)), Map.entry("%asset%", assetData.getAsset().getName())));
         List<Component> lore;
         lore = Profitable.getLang().langToLore("gui.order-building.units-select.buttons.submit.lore",
                 Map.entry("%asset%", order.getAsset()),
