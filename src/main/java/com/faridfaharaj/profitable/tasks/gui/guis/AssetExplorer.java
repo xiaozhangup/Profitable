@@ -135,9 +135,9 @@ public final class AssetExplorer extends ChestGUI {
                 if(click.isLeftClick()){
                     button.trade(player, assetCache);
                 }
-                if(click.isRightClick()){
-                    button.graphs(player, assetCache);
-                }
+//                if(click.isRightClick()){
+//                    button.graphs(player, assetCache);
+//                } 暂时隐藏该功能
             }
         }
 

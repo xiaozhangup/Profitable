@@ -160,8 +160,8 @@ gui:
         name: "第 %page%/%pages% 页"
         lore:
           - ""
-          - "<yellow>左键：下一页</yellow>"
-          - "<yellow>右键：上一页</yellow>"
+          - "<yellow>左击：下一页</yellow>"
+          - "<yellow>右击：上一页</yellow>"
 
   number-selector:
     buttons:
@@ -187,8 +187,8 @@ gui:
           - "<dark_gray> - </dark_gray><gray>开盘价：</gray><white>$%open_price%</white>"
           - "<dark_gray> - </dark_gray><gray>当日区间：</gray><white>$%range_low% 至 $%range_high%</white>"
           - ""
-          - "<yellow>左键交易</yellow>"
-          - "<yellow>右键查看图表</yellow>"
+          - "<yellow>左击交易</yellow>"
+#          - "<yellow>右击查看图表</yellow>"
       category-selector:
         name: "分类"
         lore:
@@ -214,8 +214,8 @@ gui:
         lore:
           - "<dark_gray>配送</dark_gray>"
           - ""
-          - "<yellow>左键设置物品配送位置</yellow>"
-          - "<yellow>右键设置实体配送位置</yellow>"
+          - "<yellow>左击设置物品配送位置</yellow>"
+          - "<yellow>右击设置实体配送位置</yellow>"
   graphs:
     title: "显示 %asset% 的图表"
     buttons:
@@ -224,31 +224,31 @@ gui:
         lore:
           - "<dark_gray>%asset%</dark_gray>"
           - ""
-          - "<yellow>右键查看该周期图表</yellow>"
+          - "<yellow>右击查看该周期图表</yellow>"
       three-months:
         name: "近 3 个月"
         lore:
           - "<dark_gray>%asset%</dark_gray>"
           - ""
-          - "<yellow>右键查看该周期图表</yellow>"
+          - "<yellow>右击查看该周期图表</yellow>"
       six-months:
         name: "近 6 个月"
         lore:
           - "<dark_gray>%asset%</dark_gray>"
           - ""
-          - "<yellow>右键查看该周期图表</yellow>"
+          - "<yellow>右击查看该周期图表</yellow>"
       one-year:
         name: "近 1 年"
         lore:
           - "<dark_gray>%asset%</dark_gray>"
           - ""
-          - "<yellow>右键查看该周期图表</yellow>"
+          - "<yellow>右击查看该周期图表</yellow>"
       two-years:
         name: "近 2 年"
         lore:
           - "<dark_gray>%asset%</dark_gray>"
           - ""
-          - "<yellow>右键查看该周期图表</yellow>"
+          - "<yellow>右击查看该周期图表</yellow>"
   wallet:
     title: "资产组合"
     buttons:
@@ -261,8 +261,8 @@ gui:
           - "<gray>市场价格：%price_asset_amount%</gray>"
           - "<gray>总价值：%value_asset_amount%</gray>"
           - ""
-          - "<yellow>左键提取</yellow>"
-          - "<yellow>右键存入</yellow>"
+          - "<yellow>左击提取</yellow>"
+          - "<yellow>右击存入</yellow>"
   orders:
     title: "你的活动订单"
     buttons:
@@ -277,7 +277,7 @@ gui:
           - ""
           - "<gray>总价值：%value_asset_amount%</gray>"
           - ""
-          - "<yellow>左键取消</yellow>"
+          - "<yellow>左击取消</yellow>"
 
   deposit-withdrawal:
     title-deposit: "选择存入数量"
@@ -288,13 +288,13 @@ gui:
         lore:
           - "<dark_gray>%asset%</dark_gray>"
           - ""
-          - "<yellow>左键确认存入</yellow>"
+          - "<yellow>左击确认存入</yellow>"
       submit-withdrawal:
         name: "<yellow>数量：%amount% %asset%</yellow>"
         lore:
           - "<dark_gray>%asset%</dark_gray>"
           - ""
-          - "<yellow>左键确认提取</yellow>"
+          - "<yellow>左击确认提取</yellow>"
 
   order-building:
     buy-sell:
@@ -310,13 +310,13 @@ gui:
             - "<gray>最低挂单价格：</gray>"
             - "%price_list%"
             - ""
-            - "<yellow>左键选择卖出</yellow>"
+            - "<yellow>左击选择卖出</yellow>"
           no-orders-lore:
             - "<dark_gray>%asset%</dark_gray>"
             - ""
             - "<gray>还没有人卖出该资产！</gray>"
             - ""
-            - "<gray>左键选择卖出</gray>"
+            - "<gray>左击选择卖出</gray>"
         buy:
           name: "%side% 订单"
           lore:
@@ -327,13 +327,13 @@ gui:
             - "<gray>最高挂单价格：</gray>"
             - "%price_list%"
             - ""
-            - "<yellow>左键选择买入</yellow>"
+            - "<yellow>左击选择买入</yellow>"
           no-orders-lore:
             - "<dark_gray>%asset%</dark_gray>"
             - ""
             - "<gray>还没有人买入该资产！</gray>"
             - ""
-            - "<gray>左键选择买入</gray>"
+            - "<gray>左击选择买入</gray>"
 
     type-select:
       title: "请选择订单类型"
@@ -413,5 +413,5 @@ gui:
             - ""
             - "<gray>总价值：%value_asset_amount%</gray>"
             - ""
-            - "<yellow>左键确认发送此订单</yellow>"
+            - "<yellow>左击确认发送此订单</yellow>"
 
