@@ -20,19 +20,28 @@ public final class OrderButton extends GuiElement{
     Order order;
 
     public OrderButton(ChestGUI gui, Order order, int slot, boolean actionCancel) {
-        super(gui, order.isSideBuy()?new ItemStack(Material.PAPER):new ItemStack(Material.MAP), order.isSideBuy()?Profitable.getLang().get("orders.sides.buy").color(Configuration.COLORBULLISH):Profitable.getLang().get("orders.sides.sell").color(Configuration.COLORBEARISH),
-                Profitable.getLang().langToLore(actionCancel?"gui.orders.buttons.order.lore":"gui.order-building.confirmation.buttons.submit.lore",
-                        Map.entry("%asset%", order.getAsset()),
-                        Map.entry("%order_type%", order.getType().toString()),
-                        Map.entry("%base_asset_amount%", String.valueOf(order.getUnits())),
-                        Map.entry("%quote_asset_amount%", MessagingUtil.assetAmmount(Configuration.MAINCURRENCYASSET, order.getPrice())),
-                        Map.entry("%value_asset_amount%", MessagingUtil.assetAmmount(Configuration.MAINCURRENCYASSET, order.getPrice()*order.getUnits()))
-                ),
+        this(gui, order, slot, actionCancel, order.getPrice());
+    }
+
+    public OrderButton(ChestGUI gui, Order order, int slot, boolean actionCancel, double displayPrice) {
+        super(gui,
+                order.isSideBuy()?new ItemStack(Material.PAPER):new ItemStack(Material.MAP),
+                order.isSideBuy()?Profitable.getLang().get("orders.sides.buy").color(Configuration.COLORBULLISH):Profitable.getLang().get("orders.sides.sell").color(Configuration.COLORBEARISH),
+                buildLore(order, actionCancel, displayPrice),
                 slot);
 
         this.order = order;
+    }
 
-
+    private static List<Component> buildLore(Order order, boolean actionCancel, double displayPrice) {
+        double valueForDisplay = displayPrice * order.getUnits();
+        return Profitable.getLang().langToLore(actionCancel?"gui.orders.buttons.order.lore":"gui.order-building.confirmation.buttons.submit.lore",
+                Map.entry("%asset%", order.getAsset()),
+                Map.entry("%order_type%", order.getType().toString()),
+                Map.entry("%base_asset_amount%", String.valueOf(order.getUnits())),
+                Map.entry("%quote_asset_amount%", MessagingUtil.assetAmmount(Configuration.MAINCURRENCYASSET, displayPrice)),
+                Map.entry("%value_asset_amount%", MessagingUtil.assetAmmount(Configuration.MAINCURRENCYASSET, valueForDisplay))
+        );
     }
 
     public void cancel(Player player){

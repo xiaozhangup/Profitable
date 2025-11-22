@@ -39,7 +39,16 @@ public final  class ConfirmOrder extends ChestGUI {
         fillAll(Material.BLACK_STAINED_GLASS_PANE);
         buttons[0] = new ReturnButton(this, vectorSlotPosition(0, 2));
 
-        buttons[1] = new OrderButton(this, order, vectorSlotPosition(4, 1), false);
+        double displayPrice = order.getPrice();
+        if(order.getType() == Order.OrderType.MARKET) {
+            if(order.isSideBuy()) {
+                displayPrice = askOrders.isEmpty()? assetData.getlastCandle().getClose() : askOrders.getFirst().getPrice();
+            } else {
+                displayPrice = bidOrders.isEmpty()? assetData.getlastCandle().getClose() : bidOrders.getFirst().getPrice();
+            }
+        }
+
+        buttons[1] = new OrderButton(this, order, vectorSlotPosition(4, 1), false, displayPrice);
 
     }
 
