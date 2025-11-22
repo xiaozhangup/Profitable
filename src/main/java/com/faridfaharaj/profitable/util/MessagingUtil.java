@@ -33,7 +33,7 @@ public class MessagingUtil {
     }
 
     public static String assetAmmount(Asset asset, double amount){
-        return "<color:" + asset.getColor().asHexString() + ">" + decimalFormat.format(amount) + " " + asset.getCode() + "</color>";
+        return "<color:" + asset.getColor().asHexString() + ">" + decimalFormat.format(amount) + " " + asset.getName() + "</color>";
     }
 
     public static Component assetSummary(Asset asset){

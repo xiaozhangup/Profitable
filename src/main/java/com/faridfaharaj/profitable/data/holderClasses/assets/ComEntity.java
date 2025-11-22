@@ -161,7 +161,7 @@ public class ComEntity extends Asset {
 
         EntityType entityType = EntityType.fromName(stack.getType().name().replace("_SPAWN_EGG",""));
 
-        return "<lang:entity.minecraft." + entityType.toString().toLowerCase() + ">";
+        return "<lang:" + entityType.translationKey() + ">";
     }
 
 }

@@ -37,7 +37,7 @@ public final class AssetButton extends GuiElement {
                 change = assetData.getlastCandle().getClose()-assetData.getlastCandle().getOpen(),
                 volume = assetData.getlastCandle().getVolume(), open = assetData.getlastCandle().getOpen();
 
-        String symbol = assetData.getAsset().getAssetType() == Asset.AssetType.CURRENCY? Configuration.MAINCURRENCYASSET.getCode() + "/" + assetData.getAsset().getCode():assetData.getAsset().getCode();
+        String symbol = assetData.getAsset().getAssetType() == Asset.AssetType.CURRENCY? Configuration.MAINCURRENCYASSET.getCode() + "/" + assetData.getAsset().getCode():assetData.getAsset().getName();
 
         this.display = assetData.getAsset().getStack();
 

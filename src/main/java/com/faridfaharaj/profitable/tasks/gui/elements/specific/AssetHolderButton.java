@@ -10,6 +10,7 @@ import com.faridfaharaj.profitable.tasks.gui.guis.DepositWithdrawalGui;
 import com.faridfaharaj.profitable.util.MessagingUtil;
 import com.faridfaharaj.profitable.util.NamingUtil;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -43,7 +44,7 @@ public final class AssetHolderButton extends GuiElement {
                 this.display.setItemMeta(meta);
             }
 
-            setDisplayName(Component.text(asset.getCode(),asset.getColor()));
+            setDisplayName(MiniMessage.miniMessage().deserialize(asset.getName()).color(asset.getColor()));
 
             List<Component> lore = Profitable.getLang().langToLore("gui.wallet.buttons.asset-holding.lore",
                     Map.entry("%asset_type%", NamingUtil.nameType(asset.getAssetType())),

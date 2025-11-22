@@ -51,8 +51,8 @@ public final class UserOrdersGui extends ChestGUI {
 
             if(pages > 0){
                 pageButton = new GuiElement(this, new ItemStack(Material.PAPER), Profitable.getLang().get("gui.generic.buttons.page-selector.name",
-                        Map.entry("%page%",String.valueOf(page)),
-                        Map.entry("%pages%",String.valueOf(pages))
+                        Map.entry("%page%",String.valueOf(page + 1)),
+                        Map.entry("%pages%",String.valueOf(pages + 1))
                 ), Profitable.getLang().langToLore("gui.generic.buttons.page-selector.lore"), vectorSlotPosition(7,5));
             }
 
@@ -89,8 +89,8 @@ public final class UserOrdersGui extends ChestGUI {
                 updatePage();
                 if(pageButton != null){
                     pageButton.setDisplayName(Profitable.getLang().get("gui.generic.buttons.page-selector.name",
-                            Map.entry("%page%",String.valueOf(page)),
-                            Map.entry("%pages%",String.valueOf(pages))
+                            Map.entry("%page%",String.valueOf(page + 1)),
+                            Map.entry("%pages%",String.valueOf(pages + 1))
                     ));
                     pageButton.show(this);
                 }
@@ -113,8 +113,8 @@ public final class UserOrdersGui extends ChestGUI {
                 page = Math.clamp(page, 0, pages);
                 updatePage();
                 pageButton.setDisplayName(Profitable.getLang().get("gui.generic.buttons.page-selector.name",
-                        Map.entry("%page%",String.valueOf(page)),
-                        Map.entry("%pages%",String.valueOf(pages))
+                        Map.entry("%page%",String.valueOf(page + 1)),
+                        Map.entry("%pages%",String.valueOf(pages + 1))
                 ));
                 pageButton.show(this);
             }

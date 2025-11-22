@@ -47,4 +47,9 @@ public class Currency extends Asset {
         }
     }
 
+    @Override
+    public String getName() {
+        return code;
+    }
+
 }

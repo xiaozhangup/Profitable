@@ -60,8 +60,8 @@ public final class AssetExplorer extends ChestGUI {
                 ), vectorSlotPosition(6, 5));
 
         pageButton = new GuiElement(this, new ItemStack(Material.PAPER), Profitable.getLang().get("gui.generic.buttons.page-selector.name",
-                Map.entry("%page%",String.valueOf(page)),
-                Map.entry("%pages%",String.valueOf(pages))
+                Map.entry("%page%",String.valueOf(page + 1)),
+                Map.entry("%pages%",String.valueOf(pages + 1))
         ), Profitable.getLang().langToLore("gui.generic.buttons.page-selector.lore"), vectorSlotPosition(7,5));
 
         walletButton = new GuiElement(this, new ItemStack(Material.CHEST), Profitable.getLang().get("gui.asset-explorer.buttons.wallet.name"),
@@ -100,8 +100,8 @@ public final class AssetExplorer extends ChestGUI {
 
             if(pages > 0){
                 pageButton.setDisplayName(Profitable.getLang().get("gui.generic.buttons.page-selector.name",
-                        Map.entry("%page%",String.valueOf(page)),
-                        Map.entry("%pages%",String.valueOf(pages))
+                        Map.entry("%page%",String.valueOf(page + 1)),
+                        Map.entry("%pages%",String.valueOf(pages + 1))
                 ));
                 pageButton.show(this);
             }else {
@@ -184,8 +184,8 @@ public final class AssetExplorer extends ChestGUI {
                 page = Math.clamp(page, 0, pages);
                 updatePage();
                 pageButton.setDisplayName(Profitable.getLang().get("gui.generic.buttons.page-selector.name",
-                        Map.entry("%page%",String.valueOf(page)),
-                        Map.entry("%pages%",String.valueOf(pages))
+                        Map.entry("%page%",String.valueOf(page + 1)),
+                        Map.entry("%pages%",String.valueOf(pages + 1))
                 ));
                 pageButton.show(this);
             }

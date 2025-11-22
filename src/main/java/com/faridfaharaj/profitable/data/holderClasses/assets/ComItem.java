@@ -189,7 +189,7 @@ public class ComItem extends Asset {
             }
         }
 
-        return "<lang:item.minecraft." + stack.getType().toString().toLowerCase() + ">";
+        return "<lang:" + stack.getType().translationKey() + ">";
     }
 
 }
