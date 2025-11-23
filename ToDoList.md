@@ -55,3 +55,8 @@
 ## Bugs
 
 - Fix delivery marker duplicated "must be container" message on item delivery when clicking blocks
+
+## 改进
+- 地图中文文本渲染问题
+- 是否移除外汇和生物那两个分类
+- 物品发货到邮箱

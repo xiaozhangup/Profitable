@@ -16,8 +16,8 @@ orders:
     market-order: "市价"
     stop-limit-order: "止损限价"
   sides:
-    buy: "买单"
-    sell: "卖单"
+    buy: "收购-订单"
+    sell: "出售-订单"
   warning:
     market-ignores-price: "<yellow>市价单会忽略你设置的价格</yellow>"
 
@@ -26,10 +26,10 @@ orders:
 account:
   display: "<gray>当前账户: <yellow>(%account%)</yellow></gray>"
   delete: "<red>已删除账户: %account%</red>"
-  login: "<gray>成功登录到账户 <yellow>%account%</yellow>！</gray>"
-  registry: "<gray>账户 <yellow>%account%</yellow> 注册成功！</gray>"
-  logout: "<gray>已成功登出！</gray>"
-  password-update: "<gray>密码更新成功！</gray>"
+  login: "<gray>成功登录到账户 <yellow>%account%</yellow>!</gray>"
+  registry: "<gray>账户 <yellow>%account%</yellow> 注册成功!</gray>"
+  logout: "<gray>已成功登出!</gray>"
+  password-update: "<gray>密码更新成功!</gray>"
   error:
     account-already-exists: "<red>已存在同名账户</red>"
     password-too-long: "<red>密码长度最多为 32 个字符</red>"
@@ -44,22 +44,22 @@ exchange:
   fee-display: "<red>(包含 %amount% %asset% 手续费)</red>"
   charge-notice: "<gray>已扣除 %asset_amount% %fee%</gray>"
   payment-notice: "<gray>已收到 %asset_amount% %fee%</gray>"
-  selling-notice: "<gray><green>买入</green> %base_asset_amount%，花费 %quote_asset_amount%</gray>"
-  buying-notice: "<gray><red>卖出</red> %base_asset_amount%，获得 %quote_asset_amount%</gray>"
+  selling-notice: "<gray><green>卖出</green> %base_asset_amount%，获得 %quote_asset_amount%</gray>"
+  buying-notice: "<gray><red>买入</red> %base_asset_amount%，花费 %quote_asset_amount%</gray>"
   new-order-notice: "<gray>新建 %order_type% %side% %base_asset_amount%，价格为每个 %quote_asset_amount%</gray>"
   loading-order: "<gray>正在处理订单...</gray>"
   claim-fee-notice: "认领实体每次需支付 %fee_asset_amount% 手续费"
   warning:
     partial-fill: "<yellow>订单已部分成交</yellow>"
     partial-fill-low-liquidity: "<yellow>由于没有更多可用订单，订单只部分成交</yellow>"
-    fee-higher-than-profit: "<yellow>本次订单金额小于手续费 (%fee_asset_amount%)，你将无法获利！</yellow>"
+    fee-higher-than-profit: "<yellow>本次订单金额小于手续费 (%fee_asset_amount%)，你将无法获利!</yellow>"
   error:
     invalid-order-type: "<red>无效的订单类型</red>"
     identical-assets: "<red>必须在两个不同的资产之间进行交易</red>"
     invalid-sell-stop-trigger: "<red>卖出止损触发价必须低于当前市场价</red>"
     invalid-buy-stop-trigger: "<red>买入止损触发价必须高于当前市场价</red>"
-    cant-self-transact: "<red>你不能和自己的订单成交！请先取消当前订单</red>"
-    no-orders-found: "<red>没有可用订单，请改用限价单！</red>"
+    cant-self-transact: "<red>你不能和自己的订单成交!请先取消当前订单</red>"
+    no-orders-found: "<red>没有可用订单，请改用限价单!</red>"
 
 assets:
   amount-display: "%amount% %asset%"
@@ -91,8 +91,8 @@ delivery:
   updated-entity: "<gray>已将实体配送位置更新为: <yellow>%position%</yellow></gray>"
   error:
     items-must-be-container: "<red>物品配送位置必须是一个容器方块</red>"
-    missing-item-delivery: "<red>你必须先设置一个物品配送位置！</red>"
-    missing-entity-delivery: "<red>你必须先设置一个实体配送位置！</red>"
+    missing-item-delivery: "<red>你必须先设置一个物品配送位置!</red>"
+    missing-entity-delivery: "<red>你必须先设置一个实体配送位置!</red>"
 
 hooks:
   error:
@@ -175,7 +175,7 @@ gui:
         name: "<yellow>点击除以 10</yellow>"
 
   asset-explorer:
-    title: "资产浏览器"
+    title: "市场资源浏览器"
     buttons:
       asset:
         name: "<white>%asset%  $%price%  %price_change% %percentage_change%</white>"
@@ -183,29 +183,29 @@ gui:
           - "<dark_gray>%asset_category%</dark_gray>"
           - ""
           - "<dark_gray> - </dark_gray><gray>成交量: </gray><white>%volume%</white>"
-          - "<dark_gray> - </dark_gray><gray>开盘价: </gray><white>$%open_price%</white>"
-          - "<dark_gray> - </dark_gray><gray>当日区间: </gray><white>$%range_low% 至 $%range_high%</white>"
+          - "<dark_gray> - </dark_gray><gray>当日首售价格: </gray><white>$%open_price%</white>"
+          - "<dark_gray> - </dark_gray><gray>当日价格浮动: </gray><white>$%range_low% - $%range_high%</white>"
           - ""
           - "<yellow>左击交易</yellow>"
-#          - "<yellow>右击查看图表</yellow>"
+          - "<yellow>右击查看图表</yellow>"
       category-selector:
         name: "分类"
         lore:
-          - "<dark_gray>资产类型</dark_gray>"
+          - "<dark_gray>商品类型</dark_gray>"
           - ""
           - "%category_list%"
           - ""
-          - "<yellow>点击切换分类</yellow>"
+          - "<yellow>点击切换商品类型</yellow>"
       orders:
-        name: "管理订单"
+        name: "正在进行的  预售/预收购  订单"
         lore:
           - "<dark_gray>订单</dark_gray>"
           - ""
           - "<yellow>点击查看你的订单</yellow>"
       wallet:
-        name: "管理已持有资产"
+        name: "管理资产"
         lore:
-          - "<dark_gray>资产组合</dark_gray>"
+          - "<dark_gray>包含购买的物品和货币</dark_gray>"
           - ""
           - "<yellow>点击查看你的资产</yellow>"
       delivery:
@@ -249,7 +249,7 @@ gui:
           - ""
           - "<yellow>右击查看该周期图表</yellow>"
   wallet:
-    title: "资产组合"
+    title: "资产列表"
     buttons:
       asset-holding:
         lore:
@@ -263,7 +263,7 @@ gui:
           - "<yellow>左击提取</yellow>"
           - "<yellow>右击存入</yellow>"
   orders:
-    title: "你的活动订单"
+    title: "正在进行的订单"
     buttons:
       order:
         lore:
@@ -304,77 +304,67 @@ gui:
           lore:
             - "<dark_gray>%asset%</dark_gray>"
             - ""
-            - "<gray>卖一价: %ask_asset_amount%</gray>"
+            - "<gray>目前收购一个的价格: %ask_asset_amount%</gray>"
             - ""
-            - "<gray>最低挂单价格: </gray>"
+            - "<gray>最低在出售订单价格: </gray>"
             - "%price_list%"
             - ""
             - "<yellow>左击选择卖出</yellow>"
           no-orders-lore:
             - "<dark_gray>%asset%</dark_gray>"
             - ""
-            - "<gray>还没有人卖出该资产！</gray>"
-            - ""
-            - "<gray>左击选择卖出</gray>"
+            - "<gray>没有人在收购该资产!</gray>"
         buy:
           name: "%side% 订单"
           lore:
             - "<dark_gray>%asset%</dark_gray>"
             - ""
-            - "<gray>买一价: %bid_asset_amount%</gray>"
+            - "<gray>目前购买一个的价格: %bid_asset_amount%</gray>"
             - ""
-            - "<gray>最高挂单价格: </gray>"
+            - "<gray>最高在收购订单价格: </gray>"
             - "%price_list%"
             - ""
-            - "<yellow>左击选择买入</yellow>"
+            - "<yellow>左键选择买入</yellow>"
           no-orders-lore:
             - "<dark_gray>%asset%</dark_gray>"
             - ""
-            - "<gray>还没有人买入该资产！</gray>"
-            - ""
-            - "<gray>左击选择买入</gray>"
+            - "<gray>没有人在出售该资产!</gray>"
 
     type-select:
       title: "请选择订单类型"
       buttons:
         market:
-          name: "市价单"
+          name: "立即购买/出售"
           lore:
             - "<dark_gray>%asset%</dark_gray>"
             - ""
-            - "<gray>以市场上</gray>"
+            - "<gray>以目前市场上的最佳的出售/收购价格</gray>"
             - "<gray><yellow>立即</yellow>成交</gray>"
-            - "<gray>的最佳价格</gray>"
             - ""
-            - "<yellow>点击选择市价单</yellow>"
+            - "<yellow>左键选择交易数量</yellow>"
           lore-no-orders:
             - "<dark_gray>%asset%</dark_gray>"
-            - ""
-            - "<gray>以市场上</gray>"
-            - "<gray><yellow>立即</yellow>成交</gray>"
-            - "<gray>的最佳价格</gray>"
-            - ""
-            - "<red>当前没有可用订单！</red>"
+
+            - "<red>当前没有可用订单!</red>"
         limit:
-          name: "限价单"
+          name: "提交订单"
+          lore:
+            - "<dark_gray>%asset%</dark_gray>"
+            - ""
+            - "<gray>选择上架或收购的<yellow>价格</yellow></gray>"
+            - "<gray>上架商品</gray>"
+            - ""
+            - "<yellow>左键创建出售/收购订单</yellow>"
+        stop-limit:
+          name: "预售/预收购订单"
           lore:
             - "<dark_gray>%asset%</dark_gray>"
             - ""
             - "<gray>自定义一个<yellow>价格</yellow></gray>"
-            - "<gray>当市场价格匹配</gray>"
-            - "<gray>时自动成交</gray>"
+            - "<gray>收购订单  :  当市场有高于设定价格的订单<red>成功交易之后<red>上架</gray>"
+            - "<gray>出售订单  :  当市场有低于设定价格的订单<red>成功交易之后<red>上架</gray>"
             - ""
-            - "<yellow>点击选择限价单</yellow>"
-        stop-limit:
-          name: "止损限价单"
-          lore:
-            - "<dark_gray>%asset%</dark_gray>"
-            - ""
-            - "<gray>当价格触发</gray>"
-            - "<gray>你设置的止损价时</gray>"
-            - "<gray>自动挂出限价单</gray>"
-            - ""
-            - "<yellow>点击选择止损限价单</yellow>"
+            - "<yellow>点击创建预售/预收购订单</yellow>"
 
     price-select:
       title: "请选择价格"
@@ -410,7 +400,7 @@ gui:
             - "<gray>数量: <white>%base_asset_amount%</white></gray>"
             - "<gray>价格: %quote_asset_amount%</gray>"
             - ""
-            - "<gray>总价值: %value_asset_amount%</gray>"
+            - "<gray>总价: %value_asset_amount%</gray>"
             - ""
-            - "<yellow>左击确认发送此订单</yellow>"
+            - "<yellow>左击确认提交此订单</yellow>"
 
