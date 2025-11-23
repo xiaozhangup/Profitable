@@ -75,7 +75,7 @@ public class TemporalItems {
 
         TemporalItems.addTemp(player, TemporalItem.CLAIMINGTAG);
 
-//        setItemOnHand(player, new ItemStack(Material.NAME_TAG), "§dClaiming Tag"); TODO
+//        setItemOnHand(player, new ItemStack(Material.NAME_TAG), "§dClaiming Tag");
         setItemOnHand(player, new ItemStack(Material.NAME_TAG), Component.empty());
 
     }
@@ -89,7 +89,7 @@ public class TemporalItems {
 
         TemporalItems.addTemp(player, items?TemporalItem.ITEMDELIVERYSTICK:TemporalItem.ENTITYDELIVERYSTICK);
 
-//        setItemOnHand(player, new ItemStack(Material.CARROT_ON_A_STICK), "§ddelivery marker"); TODO
+//        setItemOnHand(player, new ItemStack(Material.CARROT_ON_A_STICK), "§ddelivery marker");
         setItemOnHand(player, new ItemStack(Material.CARROT_ON_A_STICK), Component.empty());
 
     }
