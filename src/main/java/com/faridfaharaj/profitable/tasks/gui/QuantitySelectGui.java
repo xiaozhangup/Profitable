@@ -12,6 +12,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public abstract class QuantitySelectGui extends ChestGUI {
@@ -20,11 +21,13 @@ public abstract class QuantitySelectGui extends ChestGUI {
 
     protected double amount;
     final boolean enfoceInt;
+    private static final double MIN_DECIMAL_VALUE = 0.01d;
 
     public QuantitySelectGui(Component text, boolean decimal, boolean enforceInteger, double defaultAmount) {
         super(5, text);
 
         this.amount = Math.max(defaultAmount, 1);
+        this.amount = normalizeAmount(this.amount);
 
         fillAll(Material.BLACK_STAINED_GLASS_PANE);
 
@@ -133,11 +136,7 @@ public abstract class QuantitySelectGui extends ChestGUI {
                     });
                 }
 
-                if(enfoceInt){
-                    amount = Math.max(1, (int)amount);
-                }else {
-                    amount = Math.max(0.001, amount);
-                }
+                amount = normalizeAmount(amount);
 
                 onAmountUpdate(amount);
             }
@@ -155,4 +154,19 @@ public abstract class QuantitySelectGui extends ChestGUI {
     protected abstract void onSubmitAmount(Player player, double amount);
 
     protected abstract void onReturn(Player player);
+
+    private double normalizeAmount(double value){
+        if(enfoceInt){
+            return Math.max(1d, Math.floor(value));
+        }
+        double rounded = Math.round(value * 100d) / 100d;
+        return Math.max(MIN_DECIMAL_VALUE, rounded);
+    }
+
+    protected String formatAmountForDisplay(double value){
+        if(enfoceInt){
+            return String.valueOf((int) Math.max(1d, Math.floor(value)));
+        }
+        return String.format(Locale.US, "%.2f", Math.round(value * 100d) / 100d);
+    }
 }

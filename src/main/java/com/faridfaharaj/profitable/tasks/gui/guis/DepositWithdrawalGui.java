@@ -31,7 +31,10 @@ public final class DepositWithdrawalGui extends QuantitySelectGui {
     @Override
     protected void onAmountUpdate(double newAmount) {
 
-        getSubmitButton().setDisplayName(Profitable.getLang().get(depositing?"gui.deposit-withdrawal.buttons.submit-deposit.name":"gui.deposit-withdrawal.buttons.submit-withdrawal.name", Map.entry("%amount%", String.valueOf(newAmount)), Map.entry("%asset%", asset.getCode())));
+        String formatted = formatAmountForDisplay(newAmount);
+        getSubmitButton().setDisplayName(Profitable.getLang().get(depositing?"gui.deposit-withdrawal.buttons.submit-deposit.name":"gui.deposit-withdrawal.buttons.submit-withdrawal.name",
+                Map.entry("%amount%", formatted),
+                Map.entry("%asset%", asset.getCode())));
         List<Component> lore = Profitable.getLang().langToLore(depositing?"gui.deposit-withdrawal.buttons.submit-deposit.lore":"gui.deposit-withdrawal.buttons.submit-withdrawal.lore", Map.entry("%asset%", asset.getCode()));
         getSubmitButton().setLore(lore);
         getSubmitButton().show(this);
@@ -43,7 +46,9 @@ public final class DepositWithdrawalGui extends QuantitySelectGui {
 
         ItemStack display = new ItemStack(Material.PAPER);
 
-        Component name = Profitable.getLang().get(depositing?"gui.deposit-withdrawal.buttons.submit-deposit.name":"gui.deposit-withdrawal.buttons.submit-withdrawal.name", Map.entry("%amount%", String.valueOf(amount)));
+        String formatted = formatAmountForDisplay(this.amount);
+        Component name = Profitable.getLang().get(depositing?"gui.deposit-withdrawal.buttons.submit-deposit.name":"gui.deposit-withdrawal.buttons.submit-withdrawal.name",
+                Map.entry("%amount%", formatted));
         List<Component> lore = Profitable.getLang().langToLore(depositing?"gui.deposit-withdrawal.buttons.submit-deposit.lore":"gui.deposit-withdrawal.buttons.submit-withdrawal.lore");
 
         return new GuiElement(this, display, name, lore, slot);

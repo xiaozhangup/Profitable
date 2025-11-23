@@ -45,7 +45,10 @@ public final class PriceSelect  extends QuantitySelectGui {
 
     @Override
     protected void onAmountUpdate(double newPrice) {
-        getSubmitButton().setDisplayName(Profitable.getLang().get("gui.order-building.price-select.buttons.submit.name", Map.entry("%amount%", String.valueOf(this.amount)), Map.entry("%asset%", Configuration.MAINCURRENCYASSET.getCode())));
+        String formatted = formatAmountForDisplay(newPrice);
+        getSubmitButton().setDisplayName(Profitable.getLang().get("gui.order-building.price-select.buttons.submit.name",
+                Map.entry("%amount%", formatted),
+                Map.entry("%asset%", Configuration.MAINCURRENCYASSET.getCode())));
         getSubmitButton().show(this);
     }
 
@@ -54,9 +57,10 @@ public final class PriceSelect  extends QuantitySelectGui {
 
         ItemStack display = new ItemStack(Material.MAP);
 
-        Component name = Component.text("Your price: ", Configuration.GUICOLORTITLE).append(Component.text(this.amount + " " + Configuration.MAINCURRENCYASSET.getCode(),Configuration.GUICOLORTITLEHIGHLIGHT));
-
-        name = Profitable.getLang().get("gui.order-building.price-select.buttons.submit.name", Map.entry("%amount%", String.valueOf(this.amount)), Map.entry("%asset%", Configuration.MAINCURRENCYASSET.getCode()));
+        String formatted = formatAmountForDisplay(this.amount);
+        Component name = Profitable.getLang().get("gui.order-building.price-select.buttons.submit.name",
+                Map.entry("%amount%", formatted),
+                Map.entry("%asset%", Configuration.MAINCURRENCYASSET.getCode()));
 
         return new GuiElement(this, display, name, null, slot);
     }
