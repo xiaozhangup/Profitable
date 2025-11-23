@@ -3,6 +3,7 @@ package com.faridfaharaj.profitable.tasks;
 import com.faridfaharaj.profitable.Configuration;
 import com.faridfaharaj.profitable.data.tables.Candles;
 import com.faridfaharaj.profitable.util.TimeUtil;
+import com.faridfaharaj.profitable.util.RenderUtil;
 import com.faridfaharaj.profitable.data.holderClasses.Candle;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -42,14 +43,14 @@ public class MapGraphRenderer extends MapRenderer {
 
 
         canvas.drawText(1, 1, MinecraftFont.Font, asset + " (" + interval + ")");
+//        canvas.drawImage(1, 1, RenderUtil.createTextImage(asset + " (" + interval + ")", 10));
 
         int bottomOffset = 2;
         int bottom = 128 - bottomOffset;
         int top = 128-bottomOffset-10;
 
-        rectangle(canvas, 0, bottom-top-1,128, bottom-top-1, graphColor);
-
-        rectangle(canvas, 0, bottom+1,128, bottom+1, graphColor);
+        RenderUtil.rectangle(canvas, 0, bottom-top-1,128, bottom-top-1, graphColor);
+        RenderUtil.rectangle(canvas, 0, bottom+1,128, bottom+1, graphColor);
 
 
         List<Candle> candles;
@@ -64,8 +65,8 @@ public class MapGraphRenderer extends MapRenderer {
 
         if(candles.size() <= 1){
 
-            canvas.drawText(46, bottom - top/2 - 5, MinecraftFont.Font, "No data");
-
+//            canvas.drawText(46, bottom - top/2 - 5, MinecraftFont.Font, "无数据");
+            canvas.drawImage(47, bottom - top/2 - 5, RenderUtil.createTextImage("无数据"));
             return;
         }
 
@@ -73,7 +74,8 @@ public class MapGraphRenderer extends MapRenderer {
         double highest = candles.getLast().getHigh();
 
         if(highest == lowest){
-            canvas.drawText(25, bottom - top/2 - 5, MinecraftFont.Font, "No price change");
+//            canvas.drawText(25, bottom - top/2 - 5, MinecraftFont.Font, "无价格波动");
+            canvas.drawImage(34, bottom - top/2 - 5, RenderUtil.createTextImage("无价格波动"));
             return;
         }
 
@@ -117,12 +119,12 @@ public class MapGraphRenderer extends MapRenderer {
 
             if(volume > 0){
                 volume = bottom - (int) Math.ceil(volume / candles.getLast().getVolume() * ((double) top /3));
-                shadedRectangle(canvas, offset+spacing, bottom,offset+wideness-1, (int) volume, volumeColor);
+                RenderUtil.shadedRectangle(canvas, offset+spacing, bottom,offset+wideness-1, (int) volume, volumeColor);
             }
 
-            shadedRectangle(canvas, offset+center, (int) Math.min(openPos, closePos),offset+center, (int) highPos, color);
-            shadedRectangle(canvas, offset+spacing, (int) openPos,offset+wideness-1, (int) closePos, color);
-            shadedRectangle(canvas, offset+center, (int) Math.max(openPos,closePos),offset+center, (int) lowPos, color);
+            RenderUtil.shadedRectangle(canvas, offset+center, (int) Math.min(openPos, closePos),offset+center, (int) highPos, color);
+            RenderUtil.shadedRectangle(canvas, offset+spacing, (int) openPos,offset+wideness-1, (int) closePos, color);
+            RenderUtil.shadedRectangle(canvas, offset+center, (int) Math.max(openPos,closePos),offset+center, (int) lowPos, color);
         }
 
         for (double current = Math.ceil(lowest / interval) * interval; current < highest; current += interval) {
@@ -137,7 +139,7 @@ public class MapGraphRenderer extends MapRenderer {
                 continue;
             }
 
-            DIERectangle(canvas, 0, y, 128, y, graphColor);
+            RenderUtil.DIERectangle(canvas, 0, y, 128, y, graphColor);
             canvas.drawText(1, y+2, MinecraftFont.Font, String.valueOf(current));
         }
 
@@ -145,48 +147,6 @@ public class MapGraphRenderer extends MapRenderer {
         canvas.drawText(1, bottom-7, MinecraftFont.Font, String.valueOf(lowest));
 
 
-    }
-
-    public static void rectangle(MapCanvas canvas, int initX, int initY, int targetX, int targetY, Color color){
-
-        for (int x = Math.min(initX, targetX); x <= Math.max(initX, targetX); x++) {
-            for (int y = Math.min(initY, targetY); y <= Math.max(initY, targetY); y++) {
-                canvas.setPixelColor(x, y, color);
-            }
-        }
-
-    }
-
-    public static void transparentRectangle(MapCanvas canvas, int initX, int initY, int targetX, int targetY, Color color){
-
-        for (int x = Math.min(initX, targetX); x <= Math.max(initX, targetX); x++) {
-            for (int y = Math.min(initY, targetY); y <= Math.max(initY, targetY); y++) {
-                canvas.setPixelColor(x, y, blendColors(canvas.getPixelColor(x,y), color));
-            }
-        }
-    }
-
-    public static void shadedRectangle(MapCanvas canvas, int initX, int initY, int targetX, int targetY, Color color){
-
-        for (int x = Math.min(initX, targetX); x <= Math.max(initX, targetX); x++) {
-            for (int y = Math.min(initY, targetY); y <= Math.max(initY, targetY); y++) {
-                canvas.setPixelColor(x, y, color);
-                canvas.setPixelColor(x+1, y+1, color.darker());
-            }
-        }
-
-    }
-
-    public static void DIERectangle(MapCanvas canvas, int initX, int initY, int targetX, int targetY, Color color){
-
-
-        for (int x = Math.min(initX, targetX); x <= Math.max(initX, targetX); x++) {
-            for (int y = Math.min(initY, targetY); y <= Math.max(initY, targetY); y++) {
-                if(canvas.getPixelColor(x,y) == null){
-                    canvas.setPixelColor(x, y, color);
-                }
-            }
-        }
     }
 
     public static ItemStack createGraphMap(Player player, String assetid, long time, String interval) {
@@ -201,36 +161,4 @@ public class MapGraphRenderer extends MapRenderer {
 
          return mapItem;
      }
-
-
-    public static Color blendColors(Color base, Color overlay) {
-        if (base == null) return overlay;
-
-        float alphaOver = overlay.getAlpha() / 255.0f;
-        float alphaBase = base.getAlpha() / 255.0f;
-
-        int r = (int) ((overlay.getRed() * alphaOver) + (base.getRed() * (1 - alphaOver)));
-        int g = (int) ((overlay.getGreen() * alphaOver) + (base.getGreen() * (1 - alphaOver)));
-        int b = (int) ((overlay.getBlue() * alphaOver) + (base.getBlue() * (1 - alphaOver)));
-
-        int alphaOut = (int) ((alphaOver + alphaBase * (1 - alphaOver)) * 255);
-
-        return new Color(r, g, b, alphaOut);
-    }
-
-    public static Color blendColors(Color base, Color overlay, float amount) {
-        if (base == null) return overlay;
-
-        float alphaOver = amount / 255.0f;
-        float alphaBase = base.getAlpha() / 255.0f;
-
-        int r = (int) ((overlay.getRed() * alphaOver) + (base.getRed() * (1 - alphaOver)));
-        int g = (int) ((overlay.getGreen() * alphaOver) + (base.getGreen() * (1 - alphaOver)));
-        int b = (int) ((overlay.getBlue() * alphaOver) + (base.getBlue() * (1 - alphaOver)));
-
-        int alphaOut = (int) ((alphaOver + alphaBase * (1 - alphaOver)) * 255);
-
-        return new Color(r, g, b, alphaOut);
-    }
-
 }

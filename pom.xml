@@ -51,9 +51,23 @@
             </plugin>
         </plugins>
         <resources>
+            <!-- 常规资源：启用过滤，但排除二进制字体文件，以免被当作文本处理 -->
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
+                <excludes>
+                    <exclude>**/*.ttf</exclude>
+                    <exclude>**/*.otf</exclude>
+                </excludes>
+            </resource>
+            <!-- 字体资源：不进行过滤，直接原样复制到 target/classes -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*.ttf</include>
+                    <include>**/*.otf</include>
+                </includes>
             </resource>
         </resources>
     </build>

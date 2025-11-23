@@ -6,6 +6,7 @@ import com.faridfaharaj.profitable.data.tables.Assets;
 import com.faridfaharaj.profitable.data.holderClasses.assets.Asset;
 import com.faridfaharaj.profitable.util.MessagingUtil;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
@@ -74,7 +75,8 @@ public class TemporalItems {
 
         TemporalItems.addTemp(player, TemporalItem.CLAIMINGTAG);
 
-        setItemOnHand(player, new ItemStack(Material.NAME_TAG), "§dClaiming Tag");
+//        setItemOnHand(player, new ItemStack(Material.NAME_TAG), "§dClaiming Tag"); TODO
+        setItemOnHand(player, new ItemStack(Material.NAME_TAG), Component.empty());
 
     }
 
@@ -87,7 +89,8 @@ public class TemporalItems {
 
         TemporalItems.addTemp(player, items?TemporalItem.ITEMDELIVERYSTICK:TemporalItem.ENTITYDELIVERYSTICK);
 
-        setItemOnHand(player, new ItemStack(Material.CARROT_ON_A_STICK), "§ddelivery marker");
+//        setItemOnHand(player, new ItemStack(Material.CARROT_ON_A_STICK), "§ddelivery marker"); TODO
+        setItemOnHand(player, new ItemStack(Material.CARROT_ON_A_STICK), Component.empty());
 
     }
 
@@ -109,14 +112,14 @@ public class TemporalItems {
 
         TemporalItems.addTemp(player, TemporalItem.GRAPHMAP);
 
-        setItemOnHand(player, MapGraphRenderer.createGraphMap(player, assetid, time, interval), "§dGraph " + assetid);
+        setItemOnHand(player, MapGraphRenderer.createGraphMap(player, assetid, time, interval), Component.empty()); // TODO 名称问题
     }
 
-    public static void setItemOnHand(Player player, ItemStack item, String displayName){
+    public static void setItemOnHand(Player player, ItemStack item, Component displayName){
         ItemMeta meta = item.getItemMeta();
 
         if (meta != null) {
-            meta.setDisplayName(displayName);
+            meta.displayName(displayName);
             meta.addEnchant(Enchantment.LURE, 1, true);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             item.setItemMeta(meta);

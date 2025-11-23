@@ -197,7 +197,7 @@ gui:
           - ""
           - "<yellow>点击切换商品类型</yellow>"
       orders:
-        name: "正在进行的  预售/预收购  订单"
+        name: "正在进行的 预售/预收购 订单"
         lore:
           - "<dark_gray>订单</dark_gray>"
           - ""

@@ -96,8 +96,9 @@ public class Events implements Listener {
         }
 
         if(inventory.getHolder() instanceof ChestGUI gui){
-
-            gui.slotInteracted((Player) player, event.getSlot(), event.getClick());
+            if (event.getClickedInventory() == gui.getInventory()) {
+                gui.slotInteracted((Player) player, event.getSlot(), event.getClick());
+            }
 
             event.setCancelled(true);
         }
