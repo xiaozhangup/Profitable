@@ -1,10 +1,8 @@
 package com.faridfaharaj.profitable.tasks.gui.guis;
 
-import com.faridfaharaj.profitable.Configuration;
 import com.faridfaharaj.profitable.Profitable;
 import com.faridfaharaj.profitable.data.holderClasses.assets.Asset;
 import com.faridfaharaj.profitable.data.tables.Candles;
-import com.faridfaharaj.profitable.tasks.TemporalItems;
 import com.faridfaharaj.profitable.util.TimeUtil;
 import com.faridfaharaj.profitable.tasks.gui.ChestGUI;
 import com.faridfaharaj.profitable.tasks.gui.elements.GuiElement;
@@ -26,12 +24,12 @@ import java.util.Map;
 
 public final class AssetExplorer extends ChestGUI {
 
-    GuiElement categoryButton;
+//    GuiElement categoryButton;
     GuiElement pageButton;
 
     GuiElement walletButton;
     GuiElement ordersButton;
-    GuiElement deliveryButton;
+//    GuiElement deliveryButton;
 
     AssetCache[][] assetCache = new AssetCache[5][];
     Asset.AssetType assetType;
@@ -51,16 +49,16 @@ public final class AssetExplorer extends ChestGUI {
         fillSlots(8, 0, 8,5, Material.BLACK_STAINED_GLASS_PANE);
         fillSlots(0, 4, 8,5, Material.BLACK_STAINED_GLASS_PANE);
 
-        String types = "<white>♦ </white><color:" + (assetType == Asset.AssetType.CURRENCY? NamedTextColor.WHITE.asHexString():NamedTextColor.GRAY.asHexString()) + ">" + Profitable.getLang().getString("assets.categories.forex") + "</color>%&new_line&%" +
-                "<green>♦ </green><color:" + (assetType == Asset.AssetType.COMMODITY_ITEM? NamedTextColor.GREEN.asHexString():NamedTextColor.GRAY.asHexString()) + ">" + Profitable.getLang().getString("assets.categories.commodity-item") + "</color>%&new_line&%" +
-                "<green>♦ </green><color:" + (assetType == Asset.AssetType.COMMODITY_ENTITY? NamedTextColor.GREEN.asHexString():NamedTextColor.GRAY.asHexString()) + ">" + Profitable.getLang().getString("assets.categories.commodity-entity") + "</color>";
-
-        categoryButton = new GuiElement(this, new ItemStack(Material.ENDER_EYE), Profitable.getLang().get("gui.asset-explorer.buttons.category-selector.name"),
-                Profitable.getLang().langToLore("gui.asset-explorer.buttons.category-selector.lore",
-
-                        Map.entry("%category_list%", types)
-
-                ), vectorSlotPosition(6, 5));
+//        String types = "<white>♦ </white><color:" + (assetType == Asset.AssetType.CURRENCY? NamedTextColor.WHITE.asHexString():NamedTextColor.GRAY.asHexString()) + ">" + Profitable.getLang().getString("assets.categories.forex") + "</color>%&new_line&%" +
+//                "<green>♦ </green><color:" + (assetType == Asset.AssetType.COMMODITY_ITEM? NamedTextColor.GREEN.asHexString():NamedTextColor.GRAY.asHexString()) + ">" + Profitable.getLang().getString("assets.categories.commodity-item") + "</color>%&new_line&%" +
+//                "<green>♦ </green><color:" + (assetType == Asset.AssetType.COMMODITY_ENTITY? NamedTextColor.GREEN.asHexString():NamedTextColor.GRAY.asHexString()) + ">" + Profitable.getLang().getString("assets.categories.commodity-entity") + "</color>";
+//
+//        categoryButton = new GuiElement(this, new ItemStack(Material.ENDER_EYE), Profitable.getLang().get("gui.asset-explorer.buttons.category-selector.name"),
+//                Profitable.getLang().langToLore("gui.asset-explorer.buttons.category-selector.lore",
+//
+//                        Map.entry("%category_list%", types)
+//
+//                ), vectorSlotPosition(6, 5));
 
         pageButton = new GuiElement(this, new ItemStack(Material.PAPER), Profitable.getLang().get("gui.generic.buttons.page-selector.name",
                 Map.entry("%page%",String.valueOf(page + 1)),
@@ -75,9 +73,9 @@ public final class AssetExplorer extends ChestGUI {
                 Profitable.getLang().langToLore("gui.asset-explorer.buttons.orders.lore")
                 , vectorSlotPosition(1, 5));
 
-        deliveryButton = new GuiElement(this, new ItemStack(Material.CARROT_ON_A_STICK), Profitable.getLang().get("gui.asset-explorer.buttons.delivery.name"),
-                Profitable.getLang().langToLore("gui.asset-explorer.buttons.delivery.lore")
-                , vectorSlotPosition(3, 5));
+//        deliveryButton = new GuiElement(this, new ItemStack(Material.CARROT_ON_A_STICK), Profitable.getLang().get("gui.asset-explorer.buttons.delivery.name"),
+//                Profitable.getLang().langToLore("gui.asset-explorer.buttons.delivery.lore")
+//                , vectorSlotPosition(3, 5));
 
         long time = TimeUtil.getNowMillis();
         updateAssets(player.getWorld(), assetType, previousCache, time);
@@ -162,29 +160,29 @@ public final class AssetExplorer extends ChestGUI {
             new UserOrdersGui(player, assetCache).openGui(player);
         }
 
-        if(deliveryButton.getSlot() == slot){
-            if(click.isLeftClick()){
-                player.closeInventory();
-                TemporalItems.sendDeliveryStick(player, true);
-            }
-            if(click.isRightClick()){
-                player.closeInventory();
-                TemporalItems.sendDeliveryStick(player, false);
-            }
-        }
-
-        if(categoryButton.getSlot() == slot){
-            assetType = Asset.AssetType.fromValue(assetType.getValue() == 3? 1: assetType.getValue()+1);
-
-            String types = "<white>♦ </white><color:" + (assetType == Asset.AssetType.CURRENCY? NamedTextColor.WHITE.asHexString():NamedTextColor.GRAY.asHexString()) + ">" + Profitable.getLang().getString("assets.categories.forex") + "</color>%&new_line&%" +
-                    "<green>♦ </green><color:" + (assetType == Asset.AssetType.COMMODITY_ITEM? NamedTextColor.GREEN.asHexString():NamedTextColor.GRAY.asHexString()) + ">" + Profitable.getLang().getString("assets.categories.commodity-item") + "</color>%&new_line&%" +
-                    "<green>♦ </green><color:" + (assetType == Asset.AssetType.COMMODITY_ENTITY? NamedTextColor.GREEN.asHexString():NamedTextColor.GRAY.asHexString()) + ">" + Profitable.getLang().getString("assets.categories.commodity-entity") + "</color>";
-            categoryButton.setLore(Profitable.getLang().langToLore("gui.asset-explorer.buttons.category-selector.lore",
-                            Map.entry("%category_list%", types)
-            ));
-            categoryButton.show(this);
-            updateAssets(player.getWorld(), assetType, assetCache, TimeUtil.getNowMillis());
-        }
+//        if(deliveryButton.getSlot() == slot){
+//            if(click.isLeftClick()){
+//                player.closeInventory();
+//                TemporalItems.sendDeliveryStick(player, true);
+//            }
+//            if(click.isRightClick()){
+//                player.closeInventory();
+//                TemporalItems.sendDeliveryStick(player, false);
+//            }
+//        }
+//
+//        if(categoryButton.getSlot() == slot){
+//            assetType = Asset.AssetType.fromValue(assetType.getValue() == 3? 1: assetType.getValue()+1);
+//
+//            String types = "<white>♦ </white><color:" + (assetType == Asset.AssetType.CURRENCY? NamedTextColor.WHITE.asHexString():NamedTextColor.GRAY.asHexString()) + ">" + Profitable.getLang().getString("assets.categories.forex") + "</color>%&new_line&%" +
+//                    "<green>♦ </green><color:" + (assetType == Asset.AssetType.COMMODITY_ITEM? NamedTextColor.GREEN.asHexString():NamedTextColor.GRAY.asHexString()) + ">" + Profitable.getLang().getString("assets.categories.commodity-item") + "</color>%&new_line&%" +
+//                    "<green>♦ </green><color:" + (assetType == Asset.AssetType.COMMODITY_ENTITY? NamedTextColor.GREEN.asHexString():NamedTextColor.GRAY.asHexString()) + ">" + Profitable.getLang().getString("assets.categories.commodity-entity") + "</color>";
+//            categoryButton.setLore(Profitable.getLang().langToLore("gui.asset-explorer.buttons.category-selector.lore",
+//                            Map.entry("%category_list%", types)
+//            ));
+//            categoryButton.show(this);
+//            updateAssets(player.getWorld(), assetType, assetCache, TimeUtil.getNowMillis());
+//        }
 
         if(pages > 0){
             if(slot == pageButton.getSlot()){

@@ -16,8 +16,8 @@ orders:
     market-order: "市价"
     stop-limit-order: "止损限价"
   sides:
-    buy: "收购-订单"
-    sell: "出售-订单"
+    buy: "收购订单"
+    sell: "出售订单"
   warning:
     market-ignores-price: "<yellow>市价单会忽略你设置的价格</yellow>"
 
