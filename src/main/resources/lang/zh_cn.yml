@@ -361,8 +361,8 @@ gui:
             - "<dark_gray>%asset%</dark_gray>"
             - ""
             - "<gray>自定义一个<yellow>价格</yellow></gray>"
-            - "<gray>收购订单  :  当市场有高于设定价格的订单<red>成功交易之后<red>上架</gray>"
-            - "<gray>出售订单  :  当市场有低于设定价格的订单<red>成功交易之后<red>上架</gray>"
+            - "<gray>收购订单: 当市场有高于设定价格的订单<red>成功交易之后<red>上架</gray>"
+            - "<gray>出售订单: 当市场有低于设定价格的订单<red>成功交易之后<red>上架</gray>"
             - ""
             - "<yellow>点击创建预售/预收购订单</yellow>"
 

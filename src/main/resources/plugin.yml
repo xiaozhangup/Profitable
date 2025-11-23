@@ -18,6 +18,9 @@ commands:
     usage: /profitable <subcommand> [args]
 
 permissions:
+  profitable.command.sub:
+    description: "Grants access to use /profitable sub-command"
+    default: op
 
   profitable.market.trade.asset.item:
     description: "Allows the player to trade items on the exchange"

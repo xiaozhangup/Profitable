@@ -49,7 +49,7 @@ public class ProfitableCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        if (args.length == 0) {
+        if (args.length == 0 || !sender.hasPermission("profitable.command.sub")) {
             return assets.onCommand(sender, command, "assets", args);
         }
 
@@ -89,6 +89,10 @@ public class ProfitableCommand implements CommandExecutor, TabCompleter {
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, String[] args) {
         // 只给玩家补全
         if (!(sender instanceof Player)) {
+            return new ArrayList<>();
+        }
+
+        if (!sender.hasPermission("profitable.command.sub")) {
             return new ArrayList<>();
         }
 
