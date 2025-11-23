@@ -19,6 +19,8 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -95,6 +97,8 @@ public final class AssetExplorer extends ChestGUI {
                 }
             }
 
+            sortByVolume(assetCache[assetType.getValue()]);
+
             pages = assetCache[assetType.getValue()].length/21;
 
             updatePage();
@@ -110,6 +114,13 @@ public final class AssetExplorer extends ChestGUI {
             }
 
         });
+    }
+
+    private void sortByVolume(AssetCache[] caches){
+        if(caches == null){
+            return;
+        }
+        Arrays.sort(caches, Comparator.comparingDouble(cache -> ((AssetCache) cache).getlastCandle().getVolume()).reversed());
     }
 
     public void updatePage(){
