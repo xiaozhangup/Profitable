@@ -41,7 +41,7 @@ public class Currency extends Asset {
                 runnable.run();
             }else {
                 MessagingUtil.sendComponentMessage(player, Profitable.getLang().get("assets.error.not-enough-asset",
-                        Map.entry("%asset%", code)
+                        Map.entry("%asset%", getName())
                 ));
             }
         }
