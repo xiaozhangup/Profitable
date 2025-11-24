@@ -200,6 +200,10 @@ public class Assets {
                     continue;
                 }
                 String code = item.toUpperCase();
+                int beginIndex = code.lastIndexOf(':');
+                if (beginIndex != -1) {
+                    code = code.substring(beginIndex + 1);
+                }
                 Asset asset = new ComItem(code, Configuration.COLORHIGHLIGHT, NamingUtil.nameCommodity(code), itemStack);
                 Assets.addAsset(world,asset);
             }

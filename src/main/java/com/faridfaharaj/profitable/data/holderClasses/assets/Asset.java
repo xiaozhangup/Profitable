@@ -151,16 +151,12 @@ public abstract class Asset {
             }
         }
 
-        switch (assetType){
-            case AssetType.CURRENCY:
-                return new Currency(code, color, name, stack);
-            case AssetType.COMMODITY_ITEM:
-                return new ComItem(code, color, name, stack);
-            case AssetType.COMMODITY_ENTITY:
-                return new ComEntity(code, color, name, stack);
-            default:
-                return new Currency(code, color, name, stack);
-        }
+        return switch (assetType) {
+            case AssetType.CURRENCY -> new Currency(code, color, name, stack);
+            case AssetType.COMMODITY_ITEM -> new ComItem(code, color, name, stack);
+            case AssetType.COMMODITY_ENTITY -> new ComEntity(code, color, name, stack);
+            default -> new Currency(code, color, name, stack);
+        };
     }
 
     public abstract void distributeAsset(World world,String account, double ammount);

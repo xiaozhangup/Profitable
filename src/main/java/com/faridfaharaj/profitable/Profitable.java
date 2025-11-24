@@ -104,24 +104,26 @@ public final class Profitable extends JavaPlugin {
         }
 
         // MainCurrency
-        if(Configuration.MULTIWORLD){
-            for(World world : this.getServer().getWorlds()){
+        foliaLib.getScheduler().runNextTick((task) -> {
+            if(Configuration.MULTIWORLD){
+                for(World world : this.getServer().getWorlds()){
+                    Assets.generateAssets(world);
+                    Accounts.registerDefaultAccount(world, "server");
+                    Accounts.changeEntityDelivery(world, "server", new Location(Profitable.getInstance().getServer().getWorlds().getFirst(), 0, 0 ,0));
+                    Accounts.changeItemDelivery(world, "server", new Location(Profitable.getInstance().getServer().getWorlds().getFirst(), 0, 0 ,0));
+                }
+                getLogger().info("Using per-world data");
+            }else{
+                World world = getServer().getWorlds().getFirst();
                 Assets.generateAssets(world);
                 Accounts.registerDefaultAccount(world, "server");
                 Accounts.changeEntityDelivery(world, "server", new Location(Profitable.getInstance().getServer().getWorlds().getFirst(), 0, 0 ,0));
                 Accounts.changeItemDelivery(world, "server", new Location(Profitable.getInstance().getServer().getWorlds().getFirst(), 0, 0 ,0));
+                getLogger().info("Using single server-wide data");
             }
-            getLogger().info("Using per-world data");
-        }else{
-            World world = getServer().getWorlds().getFirst();
-            Assets.generateAssets(world);
-            Accounts.registerDefaultAccount(world, "server");
-            Accounts.changeEntityDelivery(world, "server", new Location(Profitable.getInstance().getServer().getWorlds().getFirst(), 0, 0 ,0));
-            Accounts.changeItemDelivery(world, "server", new Location(Profitable.getInstance().getServer().getWorlds().getFirst(), 0, 0 ,0));
-            getLogger().info("Using single server-wide data");
-        }
 
-        getLogger().info("Using " + Configuration.MAINCURRENCYASSET.getCode() + " as main currency on the exchange");
+            getLogger().info("Using " + Configuration.MAINCURRENCYASSET.getCode() + " as main currency on the exchange");
+        });
 
         //commands-------------------------
         // Now use a single /profitable command with subcommands dispatched in ProfitableCommand
