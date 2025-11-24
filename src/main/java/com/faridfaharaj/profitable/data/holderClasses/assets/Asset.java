@@ -152,7 +152,6 @@ public abstract class Asset {
         }
 
         return switch (assetType) {
-            case AssetType.CURRENCY -> new Currency(code, color, name, stack);
             case AssetType.COMMODITY_ITEM -> new ComItem(code, color, name, stack);
             case AssetType.COMMODITY_ENTITY -> new ComEntity(code, color, name, stack);
             default -> new Currency(code, color, name, stack);

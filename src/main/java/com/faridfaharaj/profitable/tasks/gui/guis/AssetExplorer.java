@@ -95,7 +95,7 @@ public final class AssetExplorer extends ChestGUI {
                 }
             }
 
-            sortByVolume(assetCache[assetType.getValue()]);
+//            sortByVolume(assetCache[assetType.getValue()]);
 
             pages = assetCache[assetType.getValue()].length/21;
 
