@@ -10,6 +10,8 @@ import com.faridfaharaj.profitable.hooks.PlayerPointsHook;
 import com.faridfaharaj.profitable.hooks.VaultHook;
 import com.faridfaharaj.profitable.util.MessagingUtil;
 import com.faridfaharaj.profitable.util.NamingUtil;
+import me.xiaozhangup.slimecargo.utils.FlexibleItem;
+import me.xiaozhangup.slimecargo.utils.FlexibleItemKt;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Material;
@@ -193,11 +195,12 @@ public class Assets {
         if(Configuration.GENERATEASSETS){
             //Base commodity items
             for(String item : Configuration.ALLOWEITEMS){
-                Material material = Material.getMaterial(item);
-                if(material == null){
+                ItemStack itemStack = FlexibleItemKt.flexibleItem(item);
+                if(itemStack == null){
                     continue;
                 }
-                Asset asset = new ComItem(item, Configuration.COLORHIGHLIGHT, NamingUtil.nameCommodity(item), new ItemStack(material));
+                String code = item.toUpperCase();
+                Asset asset = new ComItem(code, Configuration.COLORHIGHLIGHT, NamingUtil.nameCommodity(code), itemStack);
                 Assets.addAsset(world,asset);
             }
 

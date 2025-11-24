@@ -74,39 +74,42 @@ public class Configuration {
 
         // data-per-world feature removed: always false
         MULTIWORLD = false;
-        GENERATEASSETS = config.getBoolean("exchange.commodities.generation.active");
+        GENERATEASSETS = true;
+//        GENERATEASSETS = config.getBoolean("exchange.commodities.generation.active");
 
         if(GENERATEASSETS){
             //comodities
-            if (config.getBoolean("exchange.commodities.generation.item-whitelisting")) {
+            if (/*config.getBoolean("exchange.commodities.generation.item-whitelisting")*/true) {
 
                 Set<String> itemWhitelist = new HashSet<>(Profitable.getInstance().getConfig().getStringList("exchange.commodities.generation.commodity-item-whitelist"));
+                ALLOWEITEMS.addAll(itemWhitelist);
 
-                for (Material material : Material.values()) {
-                    if(!material.isItem()) continue;
-                    if(material.isAir()) continue;
-                    String name = material.name();
-
-                    if (itemWhitelist.contains(name)) {
-                        ALLOWEITEMS.add(name);
-                    }
-
-                }
+//                for (Material material : Material.values()) {
+//                    if(!material.isItem()) continue;
+//                    if(material.isAir()) continue;
+//                    String name = material.name();
+//
+//                    if (itemWhitelist.contains(name)) {
+//                        ALLOWEITEMS.add(name);
+//                    }
+//
+//                }
 
             } else {
 
-                Set<String> itemBlacklist = new HashSet<>(Profitable.getInstance().getConfig().getStringList("exchange.commodities.generation.commodity-item-blacklist"));
-
-                for (Material material : Material.values()) {
-                    if(!material.isItem()) continue;
-                    if(material.isAir()) continue;
-                    String name = material.name();
-
-                    if (!itemBlacklist.contains(name)) {
-                        ALLOWEITEMS.add(name);
-                    }
-
-                }
+                throw new UnsupportedOperationException("Item blacklisting is no longer supported. Please use item whitelisting instead.");
+//                Set<String> itemBlacklist = new HashSet<>(Profitable.getInstance().getConfig().getStringList("exchange.commodities.generation.commodity-item-blacklist"));
+//
+//                for (Material material : Material.values()) {
+//                    if(!material.isItem()) continue;
+//                    if(material.isAir()) continue;
+//                    String name = material.name();
+//
+//                    if (!itemBlacklist.contains(name)) {
+//                        ALLOWEITEMS.add(name);
+//                    }
+//
+//                }
 
             }
 
@@ -127,10 +130,6 @@ public class Configuration {
 
                 }
 
-                profitable.getLogger().info("Commodities to be generated:");
-                profitable.getLogger().info("- Items: " + ALLOWEITEMS);
-                profitable.getLogger().info("- Entities: " + ALLOWENTITIES);
-
             } else {
 
                 Set<String> entityBlacklist = new HashSet<>(Profitable.getInstance().getConfig().getStringList("exchange.commodities.generation.commodity-entity-blacklist"));
@@ -149,6 +148,10 @@ public class Configuration {
                 }
 
             }
+
+            profitable.getLogger().info("Commodities to be generated:");
+            profitable.getLogger().info("- Items: " + ALLOWEITEMS);
+            profitable.getLogger().info("- Entities: " + ALLOWENTITIES);
 
         }else{
 

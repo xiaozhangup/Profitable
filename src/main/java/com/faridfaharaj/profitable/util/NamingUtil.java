@@ -50,6 +50,10 @@ public class NamingUtil {
     private static final String[] assetTypeNaming = {"" , "assets.categories.forex", "assets.categories.commodity", "assets.categories.commodity", "Commodity", "Commodity", "Stock"};
 
     public static String nameCommodity(String code) {
+        int beginIndex = code.lastIndexOf(':');
+        if (beginIndex != -1) {
+            code = code.substring(beginIndex);
+        }
         String name = commodityNaming.get(code);
         if (name != null) {
             return name;

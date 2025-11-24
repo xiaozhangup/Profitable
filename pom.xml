@@ -130,5 +130,12 @@
             <version>3.3.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>me.xiaozhangup</groupId>
+            <artifactId>SlimeCargoNext</artifactId>
+            <version>1.0.1</version>
+            <scope>system</scope>
+            <systemPath>D:/下载内容/Programs/SlimeCargoNext-1.0.1-api.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>

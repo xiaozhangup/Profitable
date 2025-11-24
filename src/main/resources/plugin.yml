@@ -9,6 +9,7 @@ website: "https://github.com/faridfaharaj/Profitable"
 softdepend:
   - Vault
   - PlayerPoints
+  - SlimeCargoNext
 folia-supported: true
 
 commands:
