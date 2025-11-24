@@ -112,7 +112,7 @@ public class TemporalItems {
 
         TemporalItems.addTemp(player, TemporalItem.GRAPHMAP);
 
-        setItemOnHand(player, MapGraphRenderer.createGraphMap(player, assetid, time, interval), Component.empty()); // TODO 名称问题
+        setItemOnHand(player, MapGraphRenderer.createGraphMap(player, assetid, asset.getRawName(), time, interval), Component.empty());
     }
 
     public static void setItemOnHand(Player player, ItemStack item, Component displayName){

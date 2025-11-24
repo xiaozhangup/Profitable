@@ -11,34 +11,39 @@ import java.awt.image.BufferedImage;
  */
 public class RenderUtil {
 
-    private static volatile Font embeddedFont = null;
-    private static final String embeddedFontResourceName = "ark-pixel-12px-monospaced-zh_cn.ttf";
+    private static final String ARK_PIXEL_12_PX_MONOSPACED_ZH_CN_TTF = "ark-pixel-12px-monospaced-zh_cn.ttf";
+    private static final String FUSION_PIXEL_8_PX_MONOSPACED_ZH_HANS_TTF = "fusion-pixel-8px-monospaced-zh_hans.ttf";
 
-    private static Font getEmbeddedFont(float size) {
+    private static final Font PIXEL_12_PX = getEmbeddedFont(ARK_PIXEL_12_PX_MONOSPACED_ZH_CN_TTF, 12f);
+    private static final Font PIXEL_8_PX = getEmbeddedFont(FUSION_PIXEL_8_PX_MONOSPACED_ZH_HANS_TTF, 8f);
+
+    private static Font getEmbeddedFont(String name, float size) {
         try {
-            if (embeddedFont == null) {
-                synchronized (RenderUtil.class) {
-                    if (embeddedFont == null) {
-                        try (java.io.InputStream is = RenderUtil.class.getResourceAsStream("/" + embeddedFontResourceName)) {
-                            if (is != null) {
-                                embeddedFont = Font.createFont(Font.TRUETYPE_FONT, is);
-                            } else {
-                                embeddedFont = null;
-                            }
-                        } catch (Exception ignored) {
-                            embeddedFont = null;
-                        }
-                    }
-                }
+            java.io.InputStream is = RenderUtil.class.getResourceAsStream("/" + name);
+            if (is == null) {
+                throw new Exception("Font resource not found: " + name);
             }
-
-            if (embeddedFont != null) {
-                return embeddedFont.deriveFont(size);
-            }
-        } catch (Throwable ignored) {
+            return Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(size);
+        } catch (Throwable e) {
+            e.printStackTrace();
         }
 
-        return new Font("SansSerif", Font.PLAIN, (int) size);
+        return null;
+    }
+
+    // 自动选择字体
+    private static Font getFont(int size) {
+        switch (size) {
+            case 12 -> {
+                return PIXEL_12_PX;
+            }
+            case 8 ->{
+                return PIXEL_8_PX;
+            }
+            default -> {
+                return new Font("SansSerif", Font.PLAIN, size);
+            }
+        }
     }
 
     public static Image createTextImage(String text) {
@@ -48,8 +53,7 @@ public class RenderUtil {
     public static Image createTextImage(String text, int size) {
         if (text == null) text = "";
 
-        Font font = getEmbeddedFont((float) size);
-
+        Font font = getFont(size);
         BufferedImage measureImg = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = measureImg.createGraphics();
         g2.setFont(font);

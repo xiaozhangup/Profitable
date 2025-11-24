@@ -84,6 +84,10 @@ public abstract class Asset {
         return name;
     }
 
+    public String getRawName() {
+        return getName();
+    }
+
     public TextColor getColor(){
         return color;
     }

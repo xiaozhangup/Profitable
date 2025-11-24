@@ -5,6 +5,8 @@ import com.faridfaharaj.profitable.Profitable;
 import com.faridfaharaj.profitable.data.tables.AccountHoldings;
 import com.faridfaharaj.profitable.data.tables.Accounts;
 import com.faridfaharaj.profitable.util.MessagingUtil;
+import me.xiaozhangup.slimecargo.taboolib.module.nms.MinecraftLanguage;
+import me.xiaozhangup.slimecargo.utils.ItemUtilsKt;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -192,4 +194,21 @@ public class ComItem extends Asset {
         return "<lang:" + stack.getType().translationKey() + ">";
     }
 
+    @Override
+    public String getRawName() {
+        if (stack.hasItemMeta()) {
+            ItemMeta itemMeta = stack.getItemMeta();
+            Component displayedName = itemMeta.displayName();
+
+            if (displayedName != null) {
+                return PlainTextComponentSerializer.plainText().serialize(displayedName);
+            }
+
+            if (itemMeta.hasItemName()) {
+                return PlainTextComponentSerializer.plainText().serialize(itemMeta.itemName());
+            }
+        }
+
+        return ItemUtilsKt.getLocaleName(stack.getType());
+    }
 }

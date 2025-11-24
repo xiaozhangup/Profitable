@@ -26,11 +26,13 @@ public class MapGraphRenderer extends MapRenderer {
 
     private boolean rendered = false;
     private final String asset;
+    private final String title;
     private final long time;
     private final String interval;
 
-    public MapGraphRenderer(String asset, long time, String interval){
+    public MapGraphRenderer(String asset, String title, long time, String interval){
         this.asset = asset;
+        this.title = title;
         this.time = time;
         this.interval = interval;
     }
@@ -41,9 +43,8 @@ public class MapGraphRenderer extends MapRenderer {
         if (rendered) return;
         rendered = true;
 
-
-        canvas.drawText(1, 1, MinecraftFont.Font, asset + " (" + interval + ")");
-//        canvas.drawImage(1, 1, RenderUtil.createTextImage(asset + " (" + interval + ")", 10));
+        canvas.drawText(106, 1, MinecraftFont.Font, "(" + interval + ")");
+        canvas.drawImage(1, 0, RenderUtil.createTextImage(title, 8));
 
         int bottomOffset = 2;
         int bottom = 128 - bottomOffset;
@@ -149,10 +150,10 @@ public class MapGraphRenderer extends MapRenderer {
 
     }
 
-    public static ItemStack createGraphMap(Player player, String assetid, long time, String interval) {
+    public static ItemStack createGraphMap(Player player, String assetid, String title, long time, String interval) {
          MapView mapView = Bukkit.createMap(player.getWorld());
          mapView.getRenderers().forEach(mapView::removeRenderer);
-         mapView.addRenderer(new MapGraphRenderer(assetid, time, interval));
+         mapView.addRenderer(new MapGraphRenderer(assetid, title, time, interval));
 
          ItemStack mapItem = new ItemStack(Material.FILLED_MAP);
          MapMeta meta = (MapMeta) mapItem.getItemMeta();
